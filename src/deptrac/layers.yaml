@@ -1,0 +1,49 @@
+imports:
+  - base.yaml
+  - layers.baseline.yamlgi
+
+parameters:
+  layers:
+    - name: Application
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\Application\\.*'
+        - type: classLike
+          value: '.*App\\Shared\\Application\\.*'
+    - name: UserInterface
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\UserInterface\\.*'
+        - type: classLike
+          value: '.*App\\Shared\\UserInterface\\.*'
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\Infrastructure\\.*'
+        - type: classLike
+          value: '.*App\\Shared\\Infrastructure\\.*'
+    - name: Domain
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\Domain\\.*'
+        - type: classLike
+          value: '.*App\\Shared\\Domain\\.*'
+    - name: Other
+      collectors:
+        - type: bool
+          must:
+            - type: classLike
+              value: '.*'
+          must_not:
+            - type: layer
+              value: Application
+            - type: layer
+              value: UserInterface
+            - type: layer
+              value: Infrastructure
+            - type: layer
+              value: Domain
+  ruleset:
+    Application: [ Domain ]
+    Infrastructure: [ Application, Domain ]
+    UserInterface: [ Application, Domain ]
