@@ -8,13 +8,14 @@ use IteratorAggregate;
 use Traversable;
 
 /**
+ * This class could be immutable in nature, so add method will return new instance containing new element.
  * @template T of object
  */
 abstract class TypedCollection implements IteratorAggregate
 {
     /** @param list<object> $elements */
     private final function __construct(
-        private readonly array $elements = []
+        private array $elements = []
     ) {
         foreach ($this->elements as $element) {
             $this->validate($element);
@@ -39,10 +40,11 @@ abstract class TypedCollection implements IteratorAggregate
 
     public function add(object $element): static
     {
-        return new static([
-            ...$this->elements,
-            $element
-        ]);
+        $this->validate($element);
+
+        $this->elements[] = $element;
+
+        return $this;
     }
 
     private function validate(object $element): void

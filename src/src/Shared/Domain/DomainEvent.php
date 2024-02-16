@@ -2,6 +2,6 @@
 
 namespace App\Shared\Domain;
 
-abstract class DomainEvent
+abstract class DomainEvent implements DomainEventInterface
 {
 }

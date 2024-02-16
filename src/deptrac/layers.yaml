@@ -1,6 +1,6 @@
 imports:
   - base.yaml
-  - layers.baseline.yamlgi
+  - layers.baseline.yaml
 
 parameters:
   layers:
@@ -33,7 +33,7 @@ parameters:
         - type: bool
           must:
             - type: classLike
-              value: '.*'
+              value: '.*\\.*'
           must_not:
             - type: layer
               value: Application
