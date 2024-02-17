@@ -8,7 +8,6 @@ use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 
 final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInterface
@@ -29,16 +28,15 @@ final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInter
             $employee->getDepartment()->getBonusId()->getValue()
         );
 
+        $bonus = new Money(
+            $result['bonus']['amount'],
+            CurrencyEnum::from($result['bonus']['currency'])
+        );
+
         return new BonusDetails(
             new BonusName($result['name']),
-            new Money(
-                $result['bonus']['amount'],
-                CurrencyEnum::from($result['bonus']['currency'])
-            ),
-            new Money(
-                $result['salaryWithBonus']['amount'],
-                CurrencyEnum::from(($result['salaryWithBonus']['currency']))
-            )
+            $bonus,
+            $employee->getRemunerationBase()->add($bonus)
         );
     }
 }

@@ -4,7 +4,7 @@ namespace App\Tests\Functional\Unit\Bonus;
 
 use App\Module\Bonus\Domain\Entity\PercentageBonus;
 use App\Module\Bonus\Domain\Entity\SeniorityBonus;
-use App\Module\Bonus\Domain\Enum\BonusNameEnum;
+use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
 use App\Module\Bonus\Domain\Interface\BonusInterface;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\Employee;
@@ -73,7 +73,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(1)
             ),
             new BonusDetails(
-                BonusNameEnum::PERCENTAGE,
+                BonusTypeEnum::PERCENTAGE,
                 new Money(59795, CurrencyEnum::USD),
                 new Money(213116, CurrencyEnum::USD)
             )
@@ -86,7 +86,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(30)
             ),
             new BonusDetails(
-                BonusNameEnum::PERCENTAGE,
+                BonusTypeEnum::PERCENTAGE,
                 new Money(1000, CurrencyEnum::USD),
                 new Money(101000, CurrencyEnum::USD)
             )
@@ -99,7 +99,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(5)
             ),
             new BonusDetails(
-                BonusNameEnum::PERCENTAGE,
+                BonusTypeEnum::PERCENTAGE,
                 new Money(100, CurrencyEnum::USD),
                 new Money(1100, CurrencyEnum::USD)
             )
@@ -112,7 +112,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(5)
             ),
             new BonusDetails(
-                BonusNameEnum::SENIORITY,
+                BonusTypeEnum::SENIORITY,
                 new Money(300000, CurrencyEnum::USD),
                 new Money(400000, CurrencyEnum::USD)
             )
@@ -125,7 +125,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(15)
             ),
             new BonusDetails(
-                BonusNameEnum::SENIORITY,
+                BonusTypeEnum::SENIORITY,
                 new Money(100000, CurrencyEnum::USD),
                 new Money(200000, CurrencyEnum::USD)
             )
@@ -138,7 +138,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(5)
             ),
             new BonusDetails(
-                BonusNameEnum::SENIORITY,
+                BonusTypeEnum::SENIORITY,
                 new Money(50000, CurrencyEnum::USD),
                 new Money(150000, CurrencyEnum::USD)
             )
@@ -151,7 +151,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new YearsOfSeniority(1)
             ),
             new BonusDetails(
-                BonusNameEnum::SENIORITY,
+                BonusTypeEnum::SENIORITY,
                 new Money(10000, CurrencyEnum::USD),
                 new Money(110000, CurrencyEnum::USD)
             )
