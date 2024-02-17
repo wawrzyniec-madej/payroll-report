@@ -36,6 +36,7 @@ final readonly class DbalBonusRepository implements BonusRepositoryInterface
             ->setParameter('id', $id->getValue());
 
         try {
+            /** @var null|array{id:string, type:string, yearly_bonus_amount:int, yearly_bonus_currency:string, employment_threshold:int, percentage:int} $result */
             $result = $builder->fetchAssociative();
         } catch (Exception $exception) {
             throw DatabaseException::fromPrevious($exception);

@@ -4,7 +4,6 @@ namespace App\Module\Employee\Infrastructure\Repository;
 
 use App\Module\Employee\Domain\Collection\EmployeeCollection;
 use App\Module\Employee\Domain\Entity\Employee;
-use App\Module\Employee\Domain\Exception\EmployeeNotFoundException;
 use App\Module\Employee\Domain\Interface\EmployeeRepositoryInterface;
 use App\Module\Employee\Domain\ValueObject\Name;
 use App\Module\Employee\Domain\ValueObject\Surname;
@@ -32,6 +31,7 @@ final readonly class DbalEmployeeRepository implements EmployeeRepositoryInterfa
             ->from('employee', 'e');
 
         try {
+            /** @var list<array{id:string, name:string, surname:string, date_of_employment:string, department_id:string, base_salary_amount:int, base_salary_currency:string}> $results */
             $results = $builder->fetchAllAssociative();
         } catch (Exception $exception) {
             throw DatabaseException::fromPrevious($exception);

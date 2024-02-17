@@ -25,7 +25,7 @@ final class GeneratePayrollReport
 
         return new JsonResponse(
             new ResultView(
-                new IdentifierView($payrollReportIdentifier->getValue())
+                new IdentifierView($payrollReportIdentifier)
             )
         );
     }

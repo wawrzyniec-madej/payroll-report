@@ -20,6 +20,18 @@ final class PayrollReport extends AggregateRoot
     ) {
     }
 
+    public static function recreate(
+        Identifier $identifier,
+        DateTime $generationDate,
+        PayrollReportRowCollection $rows,
+    ): self {
+        return new self(
+            $identifier,
+            $rows,
+            $generationDate
+        );
+    }
+
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         EmployeeCollection $employees,
@@ -33,7 +45,7 @@ final class PayrollReport extends AggregateRoot
 
         foreach ($employees as $employee) {
             $payrollReport->addRow(
-                PayrollReportRow::create(
+                PayrollReportRow::generate(
                     $identifierGenerator,
                     $employee,
                     $getBonusDetails

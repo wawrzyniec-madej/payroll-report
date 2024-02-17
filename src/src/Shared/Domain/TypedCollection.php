@@ -10,54 +10,60 @@ use Traversable;
 /**
  * This class could be immutable in nature, so add method will return new instance containing new element.
  * @template T of object
- * @extends IteratorAggregate<int, T>
  */
 abstract class TypedCollection implements IteratorAggregate
 {
-    /** @param list<object> $elements */
+    /** @param list<T> $elements */
     private final function __construct(
-        private array $elements = []
+        protected array $elements
     ) {
         foreach ($this->elements as $element) {
             $this->validate($element);
         }
     }
 
+    /** @param list<T> $elements */
+    public static function createFromArray(array $elements): static
+    {
+        return new static($elements);
+    }
+
     public static function createEmpty(): static
     {
-        return new static();
-    }
-
-    /** @param array<string|int, object> $elements */
-    public static function fromArray(array $elements): static
-    {
-        return new static(array_values($elements));
-    }
-
-    public static function fromSpread(object ...$elements): static
-    {
-        return static::fromArray($elements);
+        return new static([]);
     }
 
     public function add(object $element): static
     {
-        $this->validate($element);
+        /** @var T $validatedElement */
+        $validatedElement = $this->validate($element);
 
-        $this->elements[] = $element;
+        $this->elements[] = $validatedElement;
 
         return $this;
     }
 
-    private function validate(object $element): void
+    /** @return list<mixed> */
+    public function map(callable $function): array
+    {
+        return array_map(
+            $function,
+            $this->elements
+        );
+    }
+
+    private function validate(object $element): object
     {
         $allowedType = $this->typeAllowed();
 
         if (!$element instanceof $allowedType) {
             throw CollectionElementInvalidException::create($element::class, $allowedType);
         }
+
+        return $element;
     }
 
-    /** @return ArrayIterator<int, object> */
+    /** @return ArrayIterator<int, T> */
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->elements);
