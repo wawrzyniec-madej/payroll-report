@@ -2,13 +2,15 @@
 
 namespace App\Module\Bonus\Domain\ValueObject;
 
+use App\Module\Bonus\Domain\Enum\BonusNameEnum;
 use App\Shared\Domain\ValueObject\Money;
 
-final class BonusDetails
+final readonly class BonusDetails
 {
     public function __construct(
-        private readonly Money $bonus,
-        private readonly Money $salaryWithBonus
+        private BonusNameEnum $name,
+        private Money $bonus,
+        private Money $salaryWithBonus
     ) {
     }
 
@@ -20,5 +22,10 @@ final class BonusDetails
     public function getSalaryWithBonus(): Money
     {
         return $this->salaryWithBonus;
+    }
+
+    public function getName(): BonusNameEnum
+    {
+        return $this->name;
     }
 }

@@ -2,12 +2,9 @@
 
 namespace App\Module\Employee\Domain\Interface;
 
-use App\Module\Employee\Domain\Entity\Employee;
-use App\Module\Employee\Domain\Exception\EmployeeNotFoundException;
-use App\Shared\Domain\ValueObject\Identifier;
+use App\Module\Employee\Domain\Collection\EmployeeCollection;
 
 interface EmployeeRepositoryInterface
 {
-    /** @throws EmployeeNotFoundException */
-    public function getOneById(Identifier $identifier): Employee;
+    public function getAll(): EmployeeCollection;
 }

@@ -11,4 +11,13 @@ abstract class KernelTestCase extends BaseKernelTestCase
     {
         return $this->getContainer()->get($name);
     }
+
+    /** @param class-string $name */
+    public function replaceService(string $name, mixed $service): void
+    {
+        $this->getContainer()->set(
+            $name,
+            $service
+        );
+    }
 }

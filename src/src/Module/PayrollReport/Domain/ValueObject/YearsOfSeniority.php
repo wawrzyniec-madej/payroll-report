@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Bonus\Domain\ValueObject;
+namespace App\Module\PayrollReport\Domain\ValueObject;
 
-use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
+use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 
 final readonly class YearsOfSeniority
 {
@@ -17,10 +17,5 @@ final readonly class YearsOfSeniority
     public function getValue(): int
     {
         return $this->value;
-    }
-
-    public function isGreaterThan(self $compared): bool
-    {
-        return $this->value > $compared->value;
     }
 }

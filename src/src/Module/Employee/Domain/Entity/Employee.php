@@ -2,12 +2,13 @@
 
 namespace App\Module\Employee\Domain\Entity;
 
-use App\Module\Employee\Domain\ValueObject\BaseSalary;
 use App\Module\Employee\Domain\ValueObject\DateOfEmployment;
 use App\Module\Employee\Domain\ValueObject\Name;
 use App\Module\Employee\Domain\ValueObject\Surname;
 use App\Shared\Domain\AggregateRoot;
+use App\Shared\Domain\DateTime;
 use App\Shared\Domain\ValueObject\Identifier;
+use App\Shared\Domain\ValueObject\Money;
 
 final class Employee extends AggregateRoot
 {
@@ -15,9 +16,9 @@ final class Employee extends AggregateRoot
         private readonly Identifier $id,
         private readonly Name $name,
         private readonly Surname $surname,
-        private readonly DateOfEmployment $dateOfEmployment,
+        private readonly DateTime $dateOfEmployment,
         private readonly Identifier $departmentId,
-        private readonly BaseSalary $baseSalary
+        private readonly Money $baseSalary
     ) {
     }
 
@@ -25,9 +26,9 @@ final class Employee extends AggregateRoot
         Identifier $id,
         Name $name,
         Surname $surname,
-        DateOfEmployment $dateOfEmployment,
+        DateTime $dateOfEmployment,
         Identifier $departmentId,
-        BaseSalary $baseSalary
+        Money $baseSalary
     ): self {
         return new self($id, $name, $surname, $dateOfEmployment, $departmentId, $baseSalary);
     }
@@ -47,7 +48,7 @@ final class Employee extends AggregateRoot
         return $this->id;
     }
 
-    public function getDateOfEmployment(): DateOfEmployment
+    public function getDateOfEmployment(): DateTime
     {
         return $this->dateOfEmployment;
     }
@@ -57,7 +58,7 @@ final class Employee extends AggregateRoot
         return $this->departmentId;
     }
 
-    public function getBaseSalary(): BaseSalary
+    public function getBaseSalary(): Money
     {
         return $this->baseSalary;
     }

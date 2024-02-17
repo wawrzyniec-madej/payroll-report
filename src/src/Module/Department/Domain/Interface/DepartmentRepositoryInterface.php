@@ -9,5 +9,5 @@ use App\Shared\Domain\ValueObject\Identifier;
 interface DepartmentRepositoryInterface
 {
     /** @throws DepartmentNotFoundException */
-    public function getOneById(Identifier $identifier): Department;
+    public function getOneById(Identifier $id): Department;
 }

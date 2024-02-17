@@ -2,27 +2,30 @@
 
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
+use App\Shared\Domain\ValueObject\Money;
+
 final readonly class Employee
 {
     public function __construct(
-        private Name $name,
-        private Surname $surname,
-        private RemunerationBase $remunerationBase,
-        private Department $department
+        private EmployeeName $name,
+        private EmployeeSurname $surname,
+        private Money $remunerationBase,
+        private Department $department,
+        private YearsOfSeniority $yearsOfSeniority
     ) {
     }
 
-    public function getSurname(): Surname
+    public function getSurname(): EmployeeSurname
     {
         return $this->surname;
     }
 
-    public function getName(): Name
+    public function getName(): EmployeeName
     {
         return $this->name;
     }
 
-    public function getRemunerationBase(): RemunerationBase
+    public function getRemunerationBase(): Money
     {
         return $this->remunerationBase;
     }
@@ -30,5 +33,10 @@ final readonly class Employee
     public function getDepartment(): Department
     {
         return $this->department;
+    }
+
+    public function getYearsOfSeniority(): YearsOfSeniority
+    {
+        return $this->yearsOfSeniority;
     }
 }

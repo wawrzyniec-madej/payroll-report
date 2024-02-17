@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\PayrollReport\Domain\ValueObject;
+namespace App\Module\Department\Domain\ValueObject;
 
 final readonly class Name
 {

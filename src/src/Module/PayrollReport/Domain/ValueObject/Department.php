@@ -2,13 +2,13 @@
 
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
-use App\Module\PayrollReport\Domain\Interface\BonusInterface;
+use App\Shared\Domain\ValueObject\Identifier;
 
 final readonly class Department
 {
     public function __construct(
         private DepartmentName $name,
-        private BonusInterface $bonus
+        private Identifier $bonusId
     ) {
     }
 
@@ -17,8 +17,8 @@ final readonly class Department
         return $this->name;
     }
 
-    public function getBonus(): BonusInterface
+    public function getBonusId(): Identifier
     {
-        return $this->bonus;
+        return $this->bonusId;
     }
 }

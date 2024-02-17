@@ -2,21 +2,29 @@
 
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
+use App\Shared\Domain\ValueObject\Money;
+
 final readonly class BonusDetails
 {
     public function __construct(
-        private AdditionToBase $additionToBase,
-        private SalaryWithBonus $salaryWithBonus
+        private BonusName $name,
+        private Money $additionToBase,
+        private Money $salaryWithBonus
     ) {
     }
 
-    public function getSalaryWithBonus(): SalaryWithBonus
+    public function getSalaryWithBonus(): Money
     {
         return $this->salaryWithBonus;
     }
 
-    public function getAdditionToBase(): AdditionToBase
+    public function getAdditionToBase(): Money
     {
         return $this->additionToBase;
+    }
+
+    public function getName(): BonusName
+    {
+        return $this->name;
     }
 }

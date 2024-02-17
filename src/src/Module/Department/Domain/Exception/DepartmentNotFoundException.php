@@ -2,9 +2,10 @@
 
 namespace App\Module\Department\Domain\Exception;
 
+use App\Shared\Domain\Exception\DomainException;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final class DepartmentNotFoundException
+final class DepartmentNotFoundException extends DomainException
 {
     public static function forIdentifier(Identifier $identifier): self
     {

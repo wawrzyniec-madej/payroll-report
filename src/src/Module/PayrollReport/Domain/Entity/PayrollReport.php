@@ -2,37 +2,44 @@
 
 namespace App\Module\PayrollReport\Domain\Entity;
 
+use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
+use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\ValueObject\EmployeeCollection;
+use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Shared\Domain\AggregateRoot;
+use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 
 final class PayrollReport extends AggregateRoot
 {
     private function __construct(
-        private Identifier $id
+        private readonly Identifier $id,
+        private readonly PayrollReportRowCollection $rows,
+        private readonly DateTime $generationDate
     ) {
     }
 
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         EmployeeCollection $employees,
+        GetBonusDetailsInterface $getBonusDetails
     ): self {
         $payrollReport = new self(
-            $identifierGenerator->generate()
+            $identifierGenerator->generate(),
+            PayrollReportRowCollection::createEmpty(),
+            DateTime::now()
         );
 
         foreach ($employees as $employee) {
             $payrollReport->addRow(
-                PayrollReportRow::createForEmployee(
+                PayrollReportRow::create(
                     $identifierGenerator,
-                    $payrollReport,
-                    $employee
+                    $employee,
+                    $getBonusDetails
                 )
             );
         }
-
 
         $payrollReport->addEvent(
             PayrollReportGenerated::create(
@@ -58,5 +65,10 @@ final class PayrollReport extends AggregateRoot
         $this->rows->add($row);
 
         return $this;
+    }
+
+    public function getGenerationDate(): DateTime
+    {
+        return $this->generationDate;
     }
 }

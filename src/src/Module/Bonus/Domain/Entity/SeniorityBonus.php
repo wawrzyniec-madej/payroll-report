@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Bonus\Domain\Entity;
 
+use App\Module\Bonus\Domain\Enum\BonusNameEnum;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
@@ -17,7 +18,10 @@ final class SeniorityBonus extends Bonus
         private readonly Money $yearlyBonus,
         private readonly YearsOfSeniority $maximumThreshold
     ) {
-        parent::__construct($id);
+        parent::__construct(
+            $id,
+            BonusNameEnum::SENIORITY
+        );
     }
 
     public function calculateForEmployee(Employee $employee): BonusDetails
@@ -29,6 +33,7 @@ final class SeniorityBonus extends Bonus
         $salaryWithBonus = $employee->getBaseSalary()->add($bonus);
 
         return new BonusDetails(
+            $this->getName(),
             $bonus,
             $salaryWithBonus
         );
@@ -37,7 +42,6 @@ final class SeniorityBonus extends Bonus
     private function calculateYearlyBonusFromSeniority(
         YearsOfSeniority $employeeSeniority
     ): Money {
-
         $limitedSeniority = $employeeSeniority->isGreaterThan($this->maximumThreshold)
             ? $this->maximumThreshold->getValue()
             : $employeeSeniority->getValue();
