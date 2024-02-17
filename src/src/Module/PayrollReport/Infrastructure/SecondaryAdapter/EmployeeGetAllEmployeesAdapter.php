@@ -5,6 +5,8 @@ namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 use App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentById;
 use App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployees as GetAllEmployeesPrimary;
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
+use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
+use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\ValueObject\Department;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
@@ -14,8 +16,11 @@ use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
 use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
+use Exception;
 
 final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesInterface
 {
@@ -25,13 +30,25 @@ final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesIn
     ) {
     }
 
+    /**
+     * @throws InvalidYearsOfSeniorityException
+     * @throws CollectionElementInvalidException
+     * @throws InvalidDateTimeException
+     * @throws CannotGetDepartmentException
+     */
     public function getAll(): EmployeeCollection
     {
         $results = $this->getAllEmployees->get();
 
         $employees = EmployeeCollection::createEmpty();
         foreach ($results as $result) {
-            $department = $this->getDepartmentById->get($result['departmentId']);
+            $departmentId = new Identifier($result['departmentId']);
+
+            try {
+                $department = $this->getDepartmentById->get($departmentId->getValue());
+            } catch (Exception) {
+                throw CannotGetDepartmentException::create($departmentId);
+            }
 
             $employees->add(
                 new Employee(

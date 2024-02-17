@@ -6,6 +6,7 @@ use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
 
 final readonly class YearsOfSeniority
 {
+    /** @throws InvalidYearsOfSeniorityException */
     public function __construct(
         private int $value
     ) {

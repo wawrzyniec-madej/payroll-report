@@ -8,6 +8,7 @@ use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 
@@ -32,6 +33,7 @@ final class PayrollReport extends AggregateRoot
         );
     }
 
+    /** @throws CollectionElementInvalidException */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         EmployeeCollection $employees,
@@ -72,6 +74,7 @@ final class PayrollReport extends AggregateRoot
         return $this->rows;
     }
 
+    /** @throws CollectionElementInvalidException */
     public function addRow(PayrollReportRow $row): self
     {
         $this->rows->add($row);

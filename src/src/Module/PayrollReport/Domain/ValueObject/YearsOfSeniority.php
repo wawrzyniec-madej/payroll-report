@@ -6,6 +6,7 @@ use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 
 final readonly class YearsOfSeniority
 {
+    /** @throws InvalidYearsOfSeniorityException */
     public function __construct(
         private int $value
     ) {

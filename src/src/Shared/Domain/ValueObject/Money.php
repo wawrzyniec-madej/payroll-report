@@ -39,6 +39,7 @@ final class Money
         );
     }
 
+    /** @throws IncompatibleMoneyException */
     public function add(Money $money): self
     {
         if (!$this->currency->isEqual($money->currency)) {

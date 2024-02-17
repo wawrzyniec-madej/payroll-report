@@ -9,6 +9,8 @@ use App\Module\Employee\Domain\ValueObject\Name;
 use App\Module\Employee\Domain\ValueObject\Surname;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Infrastructure\Exception\DatabaseException;
@@ -22,6 +24,10 @@ final readonly class DbalEmployeeRepository implements EmployeeRepositoryInterfa
     ) {
     }
 
+    /**
+     * @throws InvalidDateTimeException
+     * @throws CollectionElementInvalidException
+     */
     public function getAll(): EmployeeCollection
     {
         $builder = $this->connection->createQueryBuilder();

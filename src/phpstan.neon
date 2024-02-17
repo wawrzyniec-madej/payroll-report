@@ -5,3 +5,8 @@ parameters:
     paths:
         - src/
     checkGenericClassInNonGenericObjectType: false
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
+        checkedExceptionClasses:
+        			- 'App\Shared\Domain\Exception\DomainException'

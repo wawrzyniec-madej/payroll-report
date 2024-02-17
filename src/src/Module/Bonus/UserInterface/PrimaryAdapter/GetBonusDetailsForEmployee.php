@@ -3,6 +3,9 @@
 namespace App\Module\Bonus\UserInterface\PrimaryAdapter;
 
 use App\Module\Bonus\Application\Query\GetBonusDetailsForEmployeeQuery;
+use App\Module\Bonus\Domain\Exception\BonusNotFoundException;
+use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
+use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
@@ -18,8 +21,10 @@ final readonly class GetBonusDetailsForEmployee
 
     /**
      * @param array{amount: int, currency: string} $baseSalary
-     *
      * @return array{name: string, bonus: array{amount: int, currency: string}}
+     * @throws BonusNotFoundException
+     * @throws InvalidYearsOfSeniorityException
+     * @throws UnsupportedBonusTypeException
      */
     public function get(array $baseSalary, int $yearsOfSeniority, string $bonusId): array
     {

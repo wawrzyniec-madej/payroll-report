@@ -11,7 +11,10 @@ use App\Shared\Domain\Exception\CollectionElementInvalidException;
  */
 abstract class TypedCollection implements \IteratorAggregate
 {
-    /** @param list<T> $elements */
+    /**
+     * @param list<T> $elements
+     * @throws CollectionElementInvalidException
+     */
     final private function __construct(
         protected array $elements
     ) {
@@ -20,17 +23,22 @@ abstract class TypedCollection implements \IteratorAggregate
         }
     }
 
-    /** @param list<T> $elements */
+    /**
+     * @param list<T> $elements
+     * @throws CollectionElementInvalidException
+     */
     public static function createFromArray(array $elements): static
     {
         return new static($elements);
     }
 
+    /** @throws CollectionElementInvalidException */
     public static function createEmpty(): static
     {
         return new static([]);
     }
 
+    /** @throws CollectionElementInvalidException */
     public function add(object $element): static
     {
         /** @var T $validatedElement */
@@ -50,6 +58,7 @@ abstract class TypedCollection implements \IteratorAggregate
         );
     }
 
+    /** @throws CollectionElementInvalidException */
     private function validate(object $element): object
     {
         $allowedType = $this->typeAllowed();

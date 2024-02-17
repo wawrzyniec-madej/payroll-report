@@ -6,11 +6,13 @@ use App\Module\Bonus\Domain\Entity\PercentageBonus;
 use App\Module\Bonus\Domain\Entity\SeniorityBonus;
 use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
 use App\Module\Bonus\Domain\Exception\BonusNotFoundException;
+use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\Interface\BonusInterface;
 use App\Module\Bonus\Domain\Interface\BonusRepositoryInterface;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Domain\ValueObject\Percentage;
@@ -25,6 +27,12 @@ final readonly class DbalBonusRepository implements BonusRepositoryInterface
     ) {
     }
 
+    /**
+     * @throws UnsupportedBonusTypeException
+     * @throws InvalidYearsOfSeniorityException
+     * @throws BonusNotFoundException
+     * @throws InvalidPercentageException
+     */
     public function getOneById(Identifier $id): BonusInterface
     {
         $builder = $this->connection->createQueryBuilder();

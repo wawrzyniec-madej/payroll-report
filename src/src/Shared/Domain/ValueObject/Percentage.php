@@ -6,6 +6,7 @@ use App\Shared\Domain\Exception\InvalidPercentageException;
 
 final readonly class Percentage
 {
+    /** @throws InvalidPercentageException */
     public function __construct(
         private int $value
     ) {

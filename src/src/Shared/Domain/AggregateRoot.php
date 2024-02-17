@@ -2,12 +2,14 @@
 
 namespace App\Shared\Domain;
 
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Interface\DomainEventInterface;
 
 abstract class AggregateRoot
 {
     private DomainEventCollection $events;
 
+    /** @throws CollectionElementInvalidException */
     public function pullEvents(): DomainEventCollection
     {
         $events = $this->getEvents();
@@ -17,11 +19,13 @@ abstract class AggregateRoot
         return $events;
     }
 
+    /** @throws CollectionElementInvalidException */
     public function addEvent(DomainEventInterface $domainEvent): void
     {
         $this->getEvents()->add($domainEvent);
     }
 
+    /** @throws CollectionElementInvalidException */
     private function getEvents(): DomainEventCollection
     {
         if (!isset($this->events)) {
