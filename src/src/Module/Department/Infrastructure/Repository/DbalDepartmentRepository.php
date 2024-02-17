@@ -24,9 +24,7 @@ final readonly class DbalDepartmentRepository implements DepartmentRepositoryInt
         $builder
             ->select('d.*')
             ->from('department', 'd')
-            ->where(
-                'd.id = :id'
-            )
+            ->where('d.id = :id')
             ->setMaxResults(1)
             ->setParameter('id', $id->getValue());
 

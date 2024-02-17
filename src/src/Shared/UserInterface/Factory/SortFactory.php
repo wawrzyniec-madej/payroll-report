@@ -12,7 +12,10 @@ final class SortFactory
 {
     private const SORT_PARAM_NAME = 'sort';
 
-    /** @param array<string, mixed> $providedParams */
+    /**
+     * @param array<string, string|array<string, string>> $providedParams
+     * @throws InvalidSortException
+     */
     public function create(SortNameCollection $allowedSortNames, array $providedParams): ?Sort
     {
         if (!array_key_exists(self::SORT_PARAM_NAME, $providedParams)) {

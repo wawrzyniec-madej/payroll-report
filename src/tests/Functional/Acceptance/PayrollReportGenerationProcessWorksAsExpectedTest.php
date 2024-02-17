@@ -3,8 +3,6 @@
 namespace App\Tests\Functional\Acceptance;
 
 use App\Tests\Helper\ApiTestCase;
-use App\Tests\Helper\ArrayChecker\ArrayChecker;
-use App\Tests\Helper\ArrayChecker\IsTypeCheck;
 
 final class PayrollReportGenerationProcessWorksAsExpectedTest extends ApiTestCase
 {
@@ -28,62 +26,42 @@ final class PayrollReportGenerationProcessWorksAsExpectedTest extends ApiTestCas
     {
         $this->client->request(
             'GET',
-            '/payroll-report/'.$generatedReportIdentifier
+            '/payroll-report/' . $generatedReportIdentifier . '/rows'
         );
 
-        $responseData = $this->getJsonResponseData();
-
-        $checker = new ArrayChecker(
+        $this->assertEquals(
             [
                 'result' => [
-                    'id' => $generatedReportIdentifier,
-                    'generationDate' => new IsTypeCheck('string'),
-                    'rows' => [
-                        [
-                            'id' => new IsTypeCheck('string'),
-                            'employee' => [
-                                'name' => 'Adam',
-                                'surname' => 'Kowalski',
-                            ],
-                            'bonusType' => 'seniority',
-                            'remunerationBase' => [
-                                'amount' => 100000,
-                                'currency' => 'usd',
-                            ],
-                            'additionToBase' => [
-                                'amount' => 100000,
-                                'currency' => 'usd',
-                            ],
-                            'salaryWithBonus' => [
-                                'amount' => 200000,
-                                'currency' => 'usd',
-                            ],
-                        ],
-                        [
-                            'id' => new IsTypeCheck('string'),
-                            'employee' => [
-                                'name' => 'Ania',
-                                'surname' => 'Nowak',
-                            ],
-                            'bonusType' => 'percentage',
-                            'remunerationBase' => [
-                                'amount' => 110000,
-                                'currency' => 'usd',
-                            ],
-                            'additionToBase' => [
-                                'amount' => 11000,
-                                'currency' => 'usd',
-                            ],
-                            'salaryWithBonus' => [
-                                'amount' => 121000,
-                                'currency' => 'usd',
-                            ],
-                        ],
+                    [
+                        'name' => 'Adam',
+                        'surname' => 'Kowalski',
+                        'department' => 'HR',
+                        'bonusType' => 'seniority',
+                        'remunerationBase' => 100000,
+                        'additionToBase' => 100000,
+                        'salaryWithBonus' => 200000
                     ],
-                ],
-            ]
+                    [
+                        'name' => 'Ania',
+                        'surname' => 'Nowak',
+                        'department' => 'Customer Service',
+                        'bonusType' => 'percentage',
+                        'remunerationBase' => 110000,
+                        'additionToBase' => 11000,
+                        'salaryWithBonus' => 121000
+                    ],
+                    [
+                        'name' => 'Monika',
+                        'surname' => 'Testowa',
+                        'department' => 'Customer Service',
+                        'bonusType' => 'percentage',
+                        'remunerationBase' => 50000,
+                        'additionToBase' => 5000,
+                        'salaryWithBonus' => 55000
+                    ]
+                ]
+            ],
+            $this->getJsonResponseData()
         );
-
-        $checker->checkData($responseData);
     }
 }

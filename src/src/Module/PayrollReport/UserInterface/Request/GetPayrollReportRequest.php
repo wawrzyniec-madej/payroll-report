@@ -13,11 +13,12 @@ use App\Shared\UserInterface\Interface\FilterableRequestInterface;
 use App\Shared\UserInterface\Interface\SortableRequestInterface;
 use App\Shared\UserInterface\Request\AbstractRequest;
 
-final readonly class GetPayrollReportRequest extends AbstractRequest implements FilterableRequestInterface, SortableRequestInterface
+final readonly class GetPayrollReportRequest extends AbstractRequest implements FilterableRequestInterface,
+                                                                                SortableRequestInterface
 {
     public function getId(): Identifier
     {
-        return new Identifier($this->request->attributes->get('id'));
+        return new Identifier($this->request->attributes->getString('id'));
     }
 
     public static function getAllowedFilterNames(): FilterNameCollection

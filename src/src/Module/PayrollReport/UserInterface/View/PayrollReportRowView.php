@@ -2,30 +2,27 @@
 
 namespace App\Module\PayrollReport\UserInterface\View;
 
-use App\Module\PayrollReport\Domain\Entity\PayrollReportRow;
-use App\Shared\UserInterface\View\MoneyView;
+use App\Module\PayrollReport\Application\DTO\PayrollReportRowDTO;
 use JsonSerializable;
 
 final readonly class PayrollReportRowView implements JsonSerializable
 {
     public function __construct(
-        private PayrollReportRow $payrollReportRow
+        private PayrollReportRowDTO $payrollReportRowDTO
     ) {
     }
 
-    /** @return array{id: string, employee: array{name: string, surname: string}, bonusType: string, remunerationBase: JsonSerializable, additionToBase: JsonSerializable, salaryWithBonus: JsonSerializable} */
+    /** @return array{name:string, surname:string, department:string, bonusType:string, remunerationBase:int, additionToBase:int, salaryWithBonus:int} */
     public function jsonSerialize(): array
     {
         return [
-            'id' => $this->payrollReportRow->getId()->getValue(),
-            'employee' => [
-                'name' => $this->payrollReportRow->getEmployeeName()->getValue(),
-                'surname' => $this->payrollReportRow->getEmployeeSurname()->getValue(),
-            ],
-            'bonusType' => $this->payrollReportRow->getBonusName()->getValue(),
-            'remunerationBase' => new MoneyView($this->payrollReportRow->getRemunerationBase()),
-            'additionToBase' => new MoneyView($this->payrollReportRow->getAdditionToBase()),
-            'salaryWithBonus' => new MoneyView($this->payrollReportRow->getSalaryWithBonus()),
+            'name' => $this->payrollReportRowDTO->getName(),
+            'surname' => $this->payrollReportRowDTO->getSurname(),
+            'department' => $this->payrollReportRowDTO->getDepartment(),
+            'bonusType' => $this->payrollReportRowDTO->getBonusType(),
+            'remunerationBase' => $this->payrollReportRowDTO->getRemunerationBase(),
+            'additionToBase' => $this->payrollReportRowDTO->getAdditionToBase(),
+            'salaryWithBonus' => $this->payrollReportRowDTO->getSalaryWithBonus(),
         ];
     }
 }

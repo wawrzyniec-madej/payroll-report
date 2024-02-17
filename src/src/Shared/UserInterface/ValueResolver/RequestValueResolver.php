@@ -3,6 +3,8 @@
 namespace App\Shared\UserInterface\ValueResolver;
 
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Factory\FilterFactory;
 use App\Shared\UserInterface\Factory\SortFactory;
 use App\Shared\UserInterface\Interface\FilterableRequestInterface;
@@ -22,12 +24,18 @@ final class RequestValueResolver implements ValueResolverInterface
     ) {
     }
 
+    /**
+     * @throws CollectionElementInvalidException
+     * @throws InvalidSortException
+     * @return iterable<RequestInterface>
+     */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $argumentType = $argument->getType();
 
         if (
-            !is_subclass_of($argumentType, RequestInterface::class)
+            !$argumentType
+            || !is_subclass_of($argumentType, RequestInterface::class)
             || $argument->getName() !== self::ALLOWED_NAME
         ) {
             return [];
@@ -39,7 +47,7 @@ final class RequestValueResolver implements ValueResolverInterface
 
         $sort = is_subclass_of($argumentType, SortableRequestInterface::class)
             ? $this->sortFactory->create($argumentType::getAllowedSortNames(), $request->query->all())
-            : FilterCollection::createEmpty();
+            : null;
 
         return [
             $argumentType::create(
