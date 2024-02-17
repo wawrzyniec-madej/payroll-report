@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class Test extends TestCase
 {
-    public function test_throws_exception_on_improper_element(): void
+    public function testThrowsExceptionOnImproperElement(): void
     {
         $this->expectException(CollectionElementInvalidException::class);
 
@@ -21,7 +21,7 @@ final class Test extends TestCase
         );
     }
 
-    public function test_accepts_proper_elements(): void
+    public function testAcceptsProperElements(): void
     {
         $collection = ClassACollection::createEmpty();
 

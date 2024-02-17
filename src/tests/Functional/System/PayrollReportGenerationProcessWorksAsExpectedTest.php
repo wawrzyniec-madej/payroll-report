@@ -8,7 +8,7 @@ use App\Tests\Helper\ArrayChecker\IsTypeCheck;
 
 final class PayrollReportGenerationProcessWorksAsExpectedTest extends ApiTestCase
 {
-    public function test_generate_returns_proper_data(): string
+    public function testGenerateReturnsProperData(): string
     {
         $this->client->request(
             'POST',
@@ -23,12 +23,12 @@ final class PayrollReportGenerationProcessWorksAsExpectedTest extends ApiTestCas
         return $responseData['result'];
     }
 
-    /** @depends test_generate_returns_proper_data */
-    public function test_get_returns_proper_data(string $generatedReportIdentifier): void
+    /** @depends testGenerateReturnsProperData */
+    public function testGetReturnsProperData(string $generatedReportIdentifier): void
     {
         $this->client->request(
             'GET',
-            '/payroll-report/' . $generatedReportIdentifier
+            '/payroll-report/'.$generatedReportIdentifier
         );
 
         $responseData = $this->getJsonResponseData();
@@ -43,44 +43,44 @@ final class PayrollReportGenerationProcessWorksAsExpectedTest extends ApiTestCas
                             'id' => new IsTypeCheck('string'),
                             'employee' => [
                                 'name' => 'Adam',
-                                'surname' => 'Kowalski'
+                                'surname' => 'Kowalski',
                             ],
                             'bonusType' => 'seniority',
                             'remunerationBase' => [
                                 'amount' => 100000,
-                                'currency' => 'usd'
+                                'currency' => 'usd',
                             ],
                             'additionToBase' => [
                                 'amount' => 100000,
-                                'currency' => 'usd'
+                                'currency' => 'usd',
                             ],
                             'salaryWithBonus' => [
                                 'amount' => 200000,
-                                'currency' => 'usd'
-                            ]
+                                'currency' => 'usd',
+                            ],
                         ],
                         [
                             'id' => new IsTypeCheck('string'),
                             'employee' => [
                                 'name' => 'Ania',
-                                'surname' => 'Nowak'
+                                'surname' => 'Nowak',
                             ],
                             'bonusType' => 'percentage',
                             'remunerationBase' => [
                                 'amount' => 110000,
-                                'currency' => 'usd'
+                                'currency' => 'usd',
                             ],
                             'additionToBase' => [
                                 'amount' => 11000,
-                                'currency' => 'usd'
+                                'currency' => 'usd',
                             ],
                             'salaryWithBonus' => [
                                 'amount' => 121000,
-                                'currency' => 'usd'
-                            ]
-                        ]
-                    ]
-                ]
+                                'currency' => 'usd',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 

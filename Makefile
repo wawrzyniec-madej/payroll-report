@@ -36,6 +36,10 @@ deptrac:
 	docker compose exec php-fpm \
     	vendor/bin/deptrac --config-file=deptrac/layers.yaml --fail-on-uncovered --report-uncovered
 
+.PHONY: cs-fix
+cs-fix:
+	docker compose exec -it php-fpm vendor/bin/php-cs-fixer fix
+
 .PHONY: system
 system:
 	$(MAKE) recreate-test-database

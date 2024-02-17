@@ -22,7 +22,7 @@ final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInter
         $result = $this->getBonusDetailsForEmployee->get(
             [
                 'amount' => $employee->getRemunerationBase()->getAmount(),
-                'currency' => $employee->getRemunerationBase()->getCurrency()->value
+                'currency' => $employee->getRemunerationBase()->getCurrency()->value,
             ],
             $employee->getYearsOfSeniority()->getValue(),
             $employee->getDepartment()->getBonusId()->getValue()

@@ -4,9 +4,8 @@ namespace App\Module\PayrollReport\UserInterface\View;
 
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
 use App\Shared\UserInterface\Collection\JsonSerializableCollection;
-use JsonSerializable;
 
-final readonly class PayrollReportView implements JsonSerializable
+final readonly class PayrollReportView implements \JsonSerializable
 {
     public function __construct(
         private PayrollReport $payrollReport
@@ -26,7 +25,7 @@ final readonly class PayrollReportView implements JsonSerializable
         return [
             'id' => $this->payrollReport->getId()->getValue(),
             'generationDate' => $this->payrollReport->getGenerationDate()->toString(),
-            'rows' => $rowViews
+            'rows' => $rowViews,
         ];
     }
 }

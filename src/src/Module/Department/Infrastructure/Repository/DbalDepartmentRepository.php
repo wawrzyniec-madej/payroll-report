@@ -31,7 +31,7 @@ final class DbalDepartmentRepository implements DepartmentRepositoryInterface
             ->setParameter('id', $id->getValue());
 
         try {
-            /** @var null|array{id:string, name:string, bonus_id:string} $result */
+            /** @var array{id:string, name:string, bonus_id:string}|null $result */
             $result = $builder->fetchAssociative();
         } catch (Exception $exception) {
             throw DatabaseException::fromPrevious($exception);

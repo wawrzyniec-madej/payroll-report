@@ -2,8 +2,6 @@
 
 namespace App\Tests\Helper\ArrayChecker;
 
-use Exception;
-
 interface CheckInterface
 {
     /** @throws CheckFailedException */

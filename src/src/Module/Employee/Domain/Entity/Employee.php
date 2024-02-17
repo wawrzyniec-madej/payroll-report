@@ -2,7 +2,6 @@
 
 namespace App\Module\Employee\Domain\Entity;
 
-use App\Module\Employee\Domain\ValueObject\DateOfEmployment;
 use App\Module\Employee\Domain\ValueObject\Name;
 use App\Module\Employee\Domain\ValueObject\Surname;
 use App\Shared\Domain\AggregateRoot;

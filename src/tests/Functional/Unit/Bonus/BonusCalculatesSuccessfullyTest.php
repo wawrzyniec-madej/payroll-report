@@ -13,13 +13,12 @@ use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Domain\ValueObject\Percentage;
 use App\Tests\Helper\IdentifierHelper;
-use Generator;
 use PHPUnit\Framework\TestCase;
 
 final class BonusCalculatesSuccessfullyTest extends TestCase
 {
     /** @dataProvider successfulDataProvider */
-    public function test_calculates_successfully(
+    public function testCalculatesSuccessfully(
         BonusInterface $bonus,
         Employee $employee,
         BonusDetails $expectedDetails
@@ -37,7 +36,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         );
     }
 
-    private function successfulDataProvider(): Generator
+    private function successfulDataProvider(): \Generator
     {
         $tenPercentBonus = new PercentageBonus(
             IdentifierHelper::generateUlid(),
@@ -76,7 +75,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::PERCENTAGE,
                 new Money(59795, CurrencyEnum::USD),
                 new Money(213116, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -89,7 +88,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::PERCENTAGE,
                 new Money(1000, CurrencyEnum::USD),
                 new Money(101000, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -102,7 +101,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::PERCENTAGE,
                 new Money(100, CurrencyEnum::USD),
                 new Money(1100, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -115,7 +114,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::SENIORITY,
                 new Money(300000, CurrencyEnum::USD),
                 new Money(400000, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -128,7 +127,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::SENIORITY,
                 new Money(100000, CurrencyEnum::USD),
                 new Money(200000, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -141,7 +140,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::SENIORITY,
                 new Money(50000, CurrencyEnum::USD),
                 new Money(150000, CurrencyEnum::USD)
-            )
+            ),
         ];
 
         yield [
@@ -154,7 +153,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 BonusTypeEnum::SENIORITY,
                 new Money(10000, CurrencyEnum::USD),
                 new Money(110000, CurrencyEnum::USD)
-            )
+            ),
         ];
     }
 }

@@ -26,7 +26,7 @@ final class Money
     public function multiplyByPercentage(Percentage $percentage): self
     {
         return new Money(
-            (int)floor($this->amount * $percentage->getFloat()),
+            (int) floor($this->amount * $percentage->getFloat()),
             $this->currency
         );
     }

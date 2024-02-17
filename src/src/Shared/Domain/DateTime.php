@@ -3,16 +3,13 @@
 namespace App\Shared\Domain;
 
 use App\Shared\Domain\Exception\InvalidDateTimeException;
-use DateTimeImmutable;
-use DateTimeInterface;
-use Exception;
 
 final readonly class DateTime
 {
     private const STRING_FORMAT = 'Y-m-d H:i:s';
 
     private function __construct(
-        private DateTimeImmutable $dateTimeImmutable
+        private \DateTimeImmutable $dateTimeImmutable
     ) {
     }
 
@@ -20,9 +17,9 @@ final readonly class DateTime
     {
         try {
             return new self(
-                new DateTimeImmutable($value)
+                new \DateTimeImmutable($value)
             );
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw InvalidDateTimeException::fromPrevious($exception);
         }
     }
@@ -30,7 +27,7 @@ final readonly class DateTime
     public static function now(): self
     {
         return new self(
-            new DateTimeImmutable()
+            new \DateTimeImmutable()
         );
     }
 
@@ -45,6 +42,6 @@ final readonly class DateTime
             $compared->dateTimeImmutable
         );
 
-        return (int)$difference->format('%y');
+        return (int) $difference->format('%y');
     }
 }

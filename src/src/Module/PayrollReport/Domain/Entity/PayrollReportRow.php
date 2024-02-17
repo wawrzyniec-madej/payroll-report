@@ -4,12 +4,10 @@ namespace App\Module\PayrollReport\Domain\Entity;
 
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
-use App\Module\PayrollReport\Domain\ValueObject\Department;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
-use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;

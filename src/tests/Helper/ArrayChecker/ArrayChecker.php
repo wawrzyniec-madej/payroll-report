@@ -18,15 +18,14 @@ final readonly class ArrayChecker
         );
     }
 
-
     private function compareArrays(array $expectation, array $data, string $parentKey = ''): void
     {
         foreach ($expectation as $key => $value) {
-            $currentKey = $parentKey . $key;
+            $currentKey = $parentKey.$key;
 
             if (array_key_exists($key, $data)) {
                 if (is_array($value)) {
-                    $this->compareArrays($value, $data[$key], $currentKey . '.');
+                    $this->compareArrays($value, $data[$key], $currentKey.'.');
                 } else {
                     $expectedValue = $data[$key];
 
@@ -37,9 +36,7 @@ final readonly class ArrayChecker
                     $check->check($expectedValue, $currentKey);
                 }
             } else {
-                throw CheckFailedException::create(
-                    sprintf('Key [%s] is missing from expected data.', $currentKey)
-                );
+                throw CheckFailedException::create(sprintf('Key [%s] is missing from expected data.', $currentKey));
             }
         }
     }

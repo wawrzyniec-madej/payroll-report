@@ -17,7 +17,6 @@ use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
-use Throwable;
 
 final readonly class DbalPayrollReportRepository implements PayrollReportRepositoryInterface
 {
@@ -36,12 +35,12 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                     ->values(
                         [
                             'id' => ':id',
-                            'generation_date' => ':generationDate'
+                            'generation_date' => ':generationDate',
                         ]
                     )
                     ->setParameters([
                         'id' => $payrollReport->getId()->getValue(),
-                        'generationDate' => $payrollReport->getGenerationDate()->toString()
+                        'generationDate' => $payrollReport->getGenerationDate()->toString(),
                     ])
                     ->executeStatement();
 
@@ -61,7 +60,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                                 'addition_to_base_currency' => ':additionToBaseCurrency',
                                 'bonus_type' => ':bonusType',
                                 'salary_with_bonus_amount' => ':salaryWithBonusAmount',
-                                'salary_with_bonus_currency' => ':salaryWithBonusCurrency'
+                                'salary_with_bonus_currency' => ':salaryWithBonusCurrency',
                             ]
                         )
                         ->setParameters([
@@ -77,12 +76,12 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                             'additionToBaseCurrency' => $payrollReportRow->getAdditionToBase()->getCurrency()->value,
                             'bonusType' => $payrollReportRow->getBonusName()->getValue(),
                             'salaryWithBonusAmount' => $payrollReportRow->getSalaryWithBonus()->getAmount(),
-                            'salaryWithBonusCurrency' => $payrollReportRow->getSalaryWithBonus()->getCurrency()->value
+                            'salaryWithBonusCurrency' => $payrollReportRow->getSalaryWithBonus()->getCurrency()->value,
                         ])
                         ->executeStatement();
                 }
             });
-        } catch (Throwable $throwable) {
+        } catch (\Throwable $throwable) {
             throw DatabaseException::fromPrevious($throwable);
         }
     }
@@ -90,7 +89,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
     public function getById(Identifier $id): PayrollReport
     {
         try {
-            /** @var null|array{id:string, generation_date:string} $reportResult */
+            /** @var array{id:string, generation_date:string}|null $reportResult */
             $reportResult = $this->connection->createQueryBuilder()
                 ->select('pr.*')
                 ->from('payroll_report', 'pr')
@@ -145,7 +144,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                 DateTime::recreate($reportResult['generation_date']),
                 $rows,
             );
-        } catch (Throwable $throwable) {
+        } catch (\Throwable $throwable) {
             throw DatabaseException::fromPrevious($throwable);
         }
     }

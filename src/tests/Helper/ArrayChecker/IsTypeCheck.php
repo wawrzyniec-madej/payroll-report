@@ -14,9 +14,7 @@ final readonly class IsTypeCheck implements CheckInterface
         $valueType = gettype($value);
 
         if ($valueType !== $this->expected) {
-            throw CheckFailedException::create(
-                sprintf('Type [%s] is not equal [%s]. On key: %s', $valueType, $this->expected, $key)
-            );
+            throw CheckFailedException::create(sprintf('Type [%s] is not equal [%s]. On key: %s', $valueType, $this->expected, $key));
         }
     }
 }

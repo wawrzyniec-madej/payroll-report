@@ -18,6 +18,7 @@ abstract class ApiTestCase extends WebTestCase
     protected function getJsonResponseData(): array
     {
         $this->assertResponseFormatSame('json');
+
         return json_decode($this->client->getResponse()->getContent(), true);
     }
 }

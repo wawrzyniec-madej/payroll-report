@@ -4,5 +4,4 @@ namespace App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElement
 
 final class ClassA
 {
-
 }

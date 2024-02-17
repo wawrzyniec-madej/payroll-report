@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AddingMoneyTest extends TestCase
 {
-    public function test_throws_exception_on_incompatible_currencies(): void
+    public function testThrowsExceptionOnIncompatibleCurrencies(): void
     {
         self::expectException(IncompatibleMoneyException::class);
 
@@ -19,7 +19,7 @@ final class AddingMoneyTest extends TestCase
         $pln->add($usd);
     }
 
-    public function test_success(): void
+    public function testSuccess(): void
     {
         $firstPln = new Money(1000, CurrencyEnum::PLN);
         $secondPln = new Money(1000, CurrencyEnum::PLN);

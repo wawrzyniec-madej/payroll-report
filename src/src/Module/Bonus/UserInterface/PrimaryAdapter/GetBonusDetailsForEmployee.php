@@ -18,6 +18,7 @@ final readonly class GetBonusDetailsForEmployee
 
     /**
      * @param array{amount: int, currency: string} $baseSalary
+     *
      * @return array{name: string, bonus: array{amount: int, currency: string}}
      */
     public function get(array $baseSalary, int $yearsOfSeniority, string $bonusId): array
@@ -34,8 +35,8 @@ final readonly class GetBonusDetailsForEmployee
             'name' => $bonusDetails->getType()->value,
             'bonus' => [
                 'amount' => $bonusDetails->getBonus()->getAmount(),
-                'currency' => $bonusDetails->getBonus()->getCurrency()->value
-            ]
+                'currency' => $bonusDetails->getBonus()->getCurrency()->value,
+            ],
         ];
     }
 }

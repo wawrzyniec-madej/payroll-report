@@ -25,7 +25,7 @@ final readonly class GetAllEmployees
                 'dateOfEmployment' => $employee->getDateOfEmployment()->toString(),
                 'departmentId' => $employee->getDepartmentId()->getValue(),
                 'baseSalaryAmount' => $employee->getBaseSalary()->getAmount(),
-                'baseSalaryCurrency' => $employee->getBaseSalary()->getCurrency()->value
+                'baseSalaryCurrency' => $employee->getBaseSalary()->getCurrency()->value,
             ];
         }
 

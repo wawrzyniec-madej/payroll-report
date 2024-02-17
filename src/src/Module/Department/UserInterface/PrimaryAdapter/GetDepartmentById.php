@@ -21,7 +21,7 @@ final class GetDepartmentById
 
         return [
             'name' => $department->getName()->getValue(),
-            'bonusId' => $department->getBonusId()->getValue()
+            'bonusId' => $department->getBonusId()->getValue(),
         ];
     }
 }
