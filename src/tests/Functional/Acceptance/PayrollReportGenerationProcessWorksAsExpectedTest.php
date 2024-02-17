@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\System;
+namespace App\Tests\Functional\Acceptance;
 
 use App\Tests\Helper\ApiTestCase;
 use App\Tests\Helper\ArrayChecker\ArrayChecker;

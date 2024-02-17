@@ -36,13 +36,13 @@ deptrac:
 cs-fix:
 	docker compose exec -it php-fpm vendor/bin/php-cs-fixer fix
 
-.PHONY: system
-system:
+.PHONY: test-acceptance
+test-acceptance:
 	$(MAKE) recreate-test-database
-	docker compose exec php-fpm bin/phpunit --testsuite "System"
+	docker compose exec php-fpm bin/phpunit --testsuite "Acceptance"
 
-.PHONY: unit
-unit:
+.PHONY: test-unit
+test-unit:
 	docker compose exec php-fpm bin/phpunit --testsuite "Unit"
 
 .PHONY: recreate-test-database
@@ -57,15 +57,20 @@ recreate-database:
 	docker compose exec php-fpm bin/console doctrine:database:create -n --env=dev
 	docker compose exec php-fpm bin/console doctrine:migrations:migrate -n --allow-no-migration --env=dev
 
-.PHONY: install
-install:
+.PHONY: composer-install
+composer-install:
+	docker compose exec php-fpm composer install
+
+.PHONY: setup
+setup:
 	$(MAKE) up
-	docker compose run composer install
+	$(MAKE) composer-install
+	$(MAKE) recreate-database
+	$(MAKE) tests
 
 .PHONY: tests
 tests:
 	$(MAKE) phpstan
 	$(MAKE) deptrac
-	$(MAKE) unit
-	$(MAKE) recreate-test-database
-	$(MAKE) system
+	$(MAKE) test-unit
+	$(MAKE) test-acceptance
