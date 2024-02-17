@@ -4,6 +4,14 @@ imports:
 
 parameters:
   layers:
+    - name: PrimaryAdapters
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\UserInterface\\PrimaryAdapter\\.*'
+    - name: SecondaryAdapters
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\.*\\Infrastructure\\SecondaryAdapter\\.*'
     - name: Application
       collectors:
         - type: classLike
@@ -12,16 +20,22 @@ parameters:
           value: '.*App\\Shared\\Application\\.*'
     - name: UserInterface
       collectors:
-        - type: classLike
-          value: '.*App\\Module\\.*\\UserInterface\\.*'
-        - type: classLike
-          value: '.*App\\Shared\\UserInterface\\.*'
+        - type: bool
+          must:
+            - type: classLike
+              value: '(.*App\\Module\\.*\\UserInterface\\.*|.*App\\Shared\\UserInterface\\.*)'
+          must_not:
+            - type: layer
+              value: PrimaryAdapters
     - name: Infrastructure
       collectors:
-        - type: classLike
-          value: '.*App\\Module\\.*\\Infrastructure\\.*'
-        - type: classLike
-          value: '.*App\\Shared\\Infrastructure\\.*'
+        - type: bool
+          must:
+            - type: classLike
+              value: '(.*App\\Module\\.*\\Infrastructure\\.*|.*App\\Shared\\Infrastructure\\.*)'
+          must_not:
+            - type: layer
+              value: SecondaryAdapters
     - name: Domain
       collectors:
         - type: classLike
@@ -43,7 +57,13 @@ parameters:
               value: Infrastructure
             - type: layer
               value: Domain
+            - type: layer
+              value: PrimaryAdapters
+            - type: layer
+              value: SecondaryAdapters
   ruleset:
     Application: [ Domain ]
     Infrastructure: [ Application, Domain, Other ]
     UserInterface: [ Application, Domain, Other ]
+    SecondaryAdapters: [ +Infrastructure, PrimaryAdapters ]
+    PrimaryAdapters: [ +UserInterface ]
