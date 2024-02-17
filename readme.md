@@ -1,24 +1,22 @@
 # Payroll application
 
-## Requirements:
+## Tips:
 1. Communication with docker is handled by Makefile
+2. If you need to generate app compatible id use `make identifier`
+
 
 ## Starting app:
 1. Execute `make setup` command
 
 ## Functionalities:
 ### Generating new payroll report
-Endpoint: `/payroll-report/generate`
+Endpoint: `POST /payroll-report/generate`
 
 Endpoint returns generated report `id` to be used in next functionality.
 ### Viewing payroll report
-Endpoint: `/payroll-report/{id}/rows`
+Endpoint: `GET /payroll-report/{id}/rows`
 
 Can be sorted using query param in format `?sort[sortName]=sortDirection`.
-
-Available sort directions are:
-- asc
-- desc
 
 Available sort names are:
 - name
@@ -28,6 +26,10 @@ Available sort names are:
 - additionToBase
 - bonusType
 - salaryWithBonus
+
+Available sort directions are:
+- asc
+- desc
 
 Can be filtered using query param in format `?filterName=filterValue`.
 

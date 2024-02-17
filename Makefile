@@ -45,6 +45,10 @@ test-acceptance:
 test-unit:
 	docker compose exec php-fpm bin/phpunit --testsuite "Unit"
 
+.PHONY: identifier
+identifier:
+	docker compose exec php-fpm bin/console app:generate:identifier
+
 .PHONY: recreate-test-database
 recreate-test-database:
 	docker compose exec php-fpm bin/console doctrine:database:drop --force --if-exists --env=test
