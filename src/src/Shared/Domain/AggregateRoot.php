@@ -2,26 +2,32 @@
 
 namespace App\Shared\Domain;
 
+use App\Shared\Domain\Interface\DomainEventInterface;
+
 abstract class AggregateRoot
 {
     private DomainEventCollection $events;
 
-    protected function __construct()
-    {
-        $this->events = DomainEventCollection::createEmpty();
-    }
-
     public function pullEvents(): DomainEventCollection
     {
-        $events = $this->events;
+        $events = $this->getEvents();
 
         $this->events = DomainEventCollection::createEmpty();
 
         return $events;
     }
 
-    public function addEvent(DomainEvent $domainEvent): void
+    public function addEvent(DomainEventInterface $domainEvent): void
     {
-        $this->events = $this->events->add($domainEvent);
+        $this->getEvents()->add($domainEvent);
+    }
+
+    private function getEvents(): DomainEventCollection
+    {
+        if (!isset($this->events)) {
+            $this->events = DomainEventCollection::createEmpty();
+        }
+
+        return $this->events;
     }
 }

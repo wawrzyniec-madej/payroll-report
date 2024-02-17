@@ -10,6 +10,7 @@ use Traversable;
 /**
  * This class could be immutable in nature, so add method will return new instance containing new element.
  * @template T of object
+ * @extends IteratorAggregate<int, T>
  */
 abstract class TypedCollection implements IteratorAggregate
 {
@@ -28,14 +29,14 @@ abstract class TypedCollection implements IteratorAggregate
     }
 
     /** @param array<string|int, object> $elements */
-    public static function createFromArray(array $elements): static
+    public static function fromArray(array $elements): static
     {
         return new static(array_values($elements));
     }
 
     public static function fromSpread(object ...$elements): static
     {
-        return static::createFromArray($elements);
+        return static::fromArray($elements);
     }
 
     public function add(object $element): static

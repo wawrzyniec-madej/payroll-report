@@ -45,5 +45,5 @@ parameters:
               value: Domain
   ruleset:
     Application: [ Domain ]
-    Infrastructure: [ Application, Domain ]
-    UserInterface: [ Application, Domain ]
+    Infrastructure: [ Application, Domain, Other ]
+    UserInterface: [ Application, Domain, Other ]
