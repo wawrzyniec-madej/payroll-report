@@ -6,8 +6,8 @@ use App\Module\Employee\Domain\ValueObject\Name;
 use App\Module\Employee\Domain\ValueObject\Surname;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Money;
 
 final class Employee extends AggregateRoot
 {

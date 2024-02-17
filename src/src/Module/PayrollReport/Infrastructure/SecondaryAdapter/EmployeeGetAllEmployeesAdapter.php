@@ -15,8 +15,8 @@ use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
 use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Money;
 use Exception;
 
 final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesInterface

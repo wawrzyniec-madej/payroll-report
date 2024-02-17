@@ -10,3 +10,4 @@ parameters:
             missingCheckedExceptionInThrows: true
         checkedExceptionClasses:
         			- 'App\Shared\Domain\Exception\DomainException'
+        			- 'App\Shared\UserInterface\Exception\UserInterfaceException'

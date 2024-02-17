@@ -8,8 +8,8 @@ use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Money;
 
 final class SeniorityBonus extends Bonus
 {

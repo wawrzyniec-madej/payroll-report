@@ -33,6 +33,15 @@ abstract class TypedCollection implements IteratorAggregate
     }
 
     /** @throws CollectionElementInvalidException */
+    public static function createFromSpread(object ...$elements): static
+    {
+        /** @var list<T> $listedElements */
+        $listedElements = $elements;
+
+        return new static($listedElements);
+    }
+
+    /** @throws CollectionElementInvalidException */
     public function add(object $element): static
     {
         /** @var T $validatedElement */

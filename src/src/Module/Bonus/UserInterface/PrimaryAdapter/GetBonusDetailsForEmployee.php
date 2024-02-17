@@ -10,8 +10,8 @@ use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\InvalidPercentageException;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Money;
 
 final readonly class GetBonusDetailsForEmployee
 {

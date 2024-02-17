@@ -10,7 +10,7 @@ use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\ValueObject\Money;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Percentage;
 use App\Tests\Helper\IdentifierHelper;
 use PHPUnit\Framework\TestCase;

@@ -4,10 +4,10 @@ namespace App\Module\PayrollReport\UserInterface\Controller;
 
 use App\Module\PayrollReport\Application\Query\GetPayrollReportQuery;
 use App\Module\PayrollReport\Domain\Exception\PayrollReportNotFound;
+use App\Module\PayrollReport\UserInterface\Request\GetPayrollReportRequest;
 use App\Module\PayrollReport\UserInterface\View\PayrollReportView;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
-use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\UserInterface\Response\JsonResponse;
 use App\Shared\UserInterface\Response\NotFoundResponse;
 use App\Shared\UserInterface\View\ResultView;
@@ -29,11 +29,13 @@ final readonly class GetPayrollReportController
      * @throws InvalidDateTimeException
      */
     #[Route(path: '/payroll-report/{id}', methods: [Request::METHOD_GET])]
-    public function __invoke(string $id): Response
+    public function __invoke(GetPayrollReportRequest $request): Response
     {
         try {
             $payrollReport = $this->getPayrollReportQuery->get(
-                new Identifier($id)
+                $request->getId(),
+                $request->getFilters(),
+                $request->getSort()
             );
         } catch (PayrollReportNotFound) {
             return new NotFoundResponse();

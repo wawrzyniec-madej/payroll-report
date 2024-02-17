@@ -4,7 +4,7 @@ namespace App\Tests\Functional\Unit\Shared\Money;
 
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
-use App\Shared\Domain\ValueObject\Money;
+use App\Shared\Domain\Money;
 use PHPUnit\Framework\TestCase;
 
 final class AddingMoneyTest extends TestCase

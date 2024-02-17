@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Shared\Domain\ValueObject;
+namespace App\Shared\Application\FilterAndSort;
 
-final readonly class Identifier
+final readonly class FilterName
 {
     public function __construct(
         private string $value

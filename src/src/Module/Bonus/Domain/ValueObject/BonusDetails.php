@@ -3,7 +3,7 @@
 namespace App\Module\Bonus\Domain\ValueObject;
 
 use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
-use App\Shared\Domain\ValueObject\Money;
+use App\Shared\Domain\Money;
 
 final readonly class BonusDetails
 {

@@ -2,7 +2,7 @@
 
 namespace App\Shared\UserInterface\View;
 
-use App\Shared\Domain\ValueObject\Money;
+use App\Shared\Domain\Money;
 use JsonSerializable;
 
 final readonly class MoneyView implements JsonSerializable

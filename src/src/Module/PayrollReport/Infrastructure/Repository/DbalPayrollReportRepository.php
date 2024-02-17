@@ -11,10 +11,12 @@ use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
+use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
+use App\Shared\Application\FilterAndSort\Sort;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
 use Exception;
@@ -88,19 +90,23 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
         }
     }
 
-    public function getById(Identifier $id): PayrollReport
-    {
+    public function getById(
+        Identifier $id,
+        FilterCollection $filters,
+        ?Sort $sort
+    ): PayrollReport {
         try {
-            /** @var array{id:string, generation_date:string}|null $reportResult */
-            $reportResult = $this->connection->createQueryBuilder()
+            $builder = $this->connection->createQueryBuilder()
                 ->select('pr.*')
                 ->from('payroll_report', 'pr')
                 ->where(
                     'pr.id = :id'
                 )
                 ->setMaxResults(1)
-                ->setParameter('id', $id->getValue())
-                ->fetchAssociative();
+                ->setParameter('id', $id->getValue());
+
+            /** @var array{id:string, generation_date:string}|null $reportResult */
+            $reportResult = $builder->fetchAssociative();
         } catch (Exception $exception) {
             throw DatabaseException::fromPrevious($exception);
         }
@@ -110,15 +116,16 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
         }
 
         try {
-            /** @var list<array{id:string, payroll_report_id:string, department:string, name:string, surname:string, remuneration_base_amount:int, remuneration_base_currency:string, addition_to_base_amount:int, addition_to_base_currency:string, bonus_type:string, salary_with_bonus_amount:int, salary_with_bonus_currency:string}> $rowResults */
-            $rowResults = $this->connection->createQueryBuilder()
+            $builder = $this->connection->createQueryBuilder()
                 ->select('prr.*')
                 ->from('payroll_report_row', 'prr')
                 ->where(
                     'prr.payroll_report_id = :payrollReportId'
                 )
-                ->setParameter('payrollReportId', $id->getValue())
-                ->fetchAllAssociative();
+                ->setParameter('payrollReportId', $id->getValue());
+
+            /** @var list<array{id:string, payroll_report_id:string, department:string, name:string, surname:string, remuneration_base_amount:int, remuneration_base_currency:string, addition_to_base_amount:int, addition_to_base_currency:string, bonus_type:string, salary_with_bonus_amount:int, salary_with_bonus_currency:string}> $rowResults */
+            $rowResults = $builder->fetchAllAssociative();
         } catch (Exception $exception) {
             throw DatabaseException::fromPrevious($exception);
         }

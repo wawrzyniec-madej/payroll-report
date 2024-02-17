@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Shared\Domain\ValueObject;
+namespace App\Shared\Domain;
 
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
+use App\Shared\Domain\ValueObject\Percentage;
 
 final readonly class Money
 {
@@ -50,11 +51,5 @@ final readonly class Money
             $this->amount + $money->amount,
             $this->currency
         );
-    }
-
-    public function isEqual(self $compared): bool
-    {
-        return $this->amount === $compared->amount
-            && $this->currency->isEqual($compared->currency);
     }
 }

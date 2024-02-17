@@ -9,7 +9,7 @@ use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\ValueObject\Money;
+use App\Shared\Domain\Money;
 use Exception;
 
 final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInterface
