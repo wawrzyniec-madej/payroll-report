@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Unit\Shared\Money;
+namespace App\Tests\Functional\Unit\Shared;
 
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;

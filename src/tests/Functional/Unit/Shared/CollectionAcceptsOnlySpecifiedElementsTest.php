@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElements;
+namespace App\Tests\Functional\Unit\Shared;
 
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
-use App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElements\Helper\ClassA;
-use App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElements\Helper\ClassACollection;
-use App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElements\Helper\ClassB;
+use App\Tests\Helper\ClassA;
+use App\Tests\Helper\ClassACollection;
+use App\Tests\Helper\ClassB;
 use PHPUnit\Framework\TestCase;
 
-final class Test extends TestCase
+final class CollectionAcceptsOnlySpecifiedElementsTest extends TestCase
 {
     public function testThrowsExceptionOnImproperElement(): void
     {

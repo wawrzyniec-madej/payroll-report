@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Unit\Shared\CollectionAcceptsOnlySpecifiedElements\Helper;
+namespace App\Tests\Helper;
 
 use App\Shared\Domain\TypedCollection;
 

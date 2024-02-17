@@ -74,7 +74,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::PERCENTAGE,
                 new Money(59795, CurrencyEnum::USD),
-                new Money(213116, CurrencyEnum::USD)
             ),
         ];
 
@@ -87,7 +86,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::PERCENTAGE,
                 new Money(1000, CurrencyEnum::USD),
-                new Money(101000, CurrencyEnum::USD)
             ),
         ];
 
@@ -100,7 +98,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::PERCENTAGE,
                 new Money(100, CurrencyEnum::USD),
-                new Money(1100, CurrencyEnum::USD)
             ),
         ];
 
@@ -113,7 +110,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
                 new Money(300000, CurrencyEnum::USD),
-                new Money(400000, CurrencyEnum::USD)
             ),
         ];
 
@@ -126,7 +122,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
                 new Money(100000, CurrencyEnum::USD),
-                new Money(200000, CurrencyEnum::USD)
             ),
         ];
 
@@ -139,7 +134,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
                 new Money(50000, CurrencyEnum::USD),
-                new Money(150000, CurrencyEnum::USD)
             ),
         ];
 
@@ -152,7 +146,6 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
                 new Money(10000, CurrencyEnum::USD),
-                new Money(110000, CurrencyEnum::USD)
             ),
         ];
     }
