@@ -23,7 +23,7 @@ final class Version20240217101052 extends AbstractMigration
             name     varchar(100) not null,
             bonus_id varchar(100) not null,
             constraint department_pk
-                primary key (id)
+            primary key (id)
         );
         SQL;
 

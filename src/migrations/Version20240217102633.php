@@ -19,8 +19,7 @@ final class Version20240217102633 extends AbstractMigration
         $sql = <<< SQL
         create table employee
         (
-            id                   varchar(100) not null
-                primary key,
+            id                   varchar(100) not null primary key,
             name                 varchar(100) not null,
             surname              varchar(100) not null,
             date_of_employment   datetime     not null,

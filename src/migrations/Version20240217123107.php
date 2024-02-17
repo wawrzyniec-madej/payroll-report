@@ -31,5 +31,14 @@ final class Version20240217123107 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $this->addSql('
+            alter table department
+            drop foreign key department_bonus_id_fk;
+        ');
+
+        $this->addSql('
+            alter table employee
+            drop foreign key employee_department_id_fk;
+        ');
     }
 }

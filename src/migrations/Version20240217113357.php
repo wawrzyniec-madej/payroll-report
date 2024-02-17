@@ -19,8 +19,7 @@ final class Version20240217113357 extends AbstractMigration
         $sql = <<< SQL
         create table payroll_report_row
         (
-            id                         varchar(100) not null
-                primary key,
+            id                         varchar(100) not null primary key,
             payroll_report_id          varchar(100) not null,
             department                 varchar(100) not null,
             name                 varchar(100) not null,
@@ -33,7 +32,7 @@ final class Version20240217113357 extends AbstractMigration
             salary_with_bonus_amount   int          not null,
             salary_with_bonus_currency varchar(100) not null,
             constraint payroll_report_row_payroll_report_id_fk
-                foreign key (payroll_report_id) references payroll_report (id)
+            foreign key (payroll_report_id) references payroll_report (id)
         );
         SQL;
 
