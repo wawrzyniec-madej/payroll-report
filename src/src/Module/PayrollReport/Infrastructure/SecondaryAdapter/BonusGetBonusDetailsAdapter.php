@@ -21,11 +21,6 @@ final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInter
     ) {
     }
 
-    /**
-     * @throws InvalidYearsOfSeniorityException
-     * @throws IncompatibleMoneyException
-     * @throws CannotGetBonusDetailsException
-     */
     public function getForEmployee(Employee $employee): BonusDetails
     {
         $bonusId = $employee->getDepartment()->getBonusId();

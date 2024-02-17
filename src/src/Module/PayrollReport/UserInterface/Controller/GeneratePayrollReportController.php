@@ -4,9 +4,11 @@ namespace App\Module\PayrollReport\UserInterface\Controller;
 
 use App\Module\PayrollReport\Application\Command\GeneratePayrollReportCommand;
 use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
+use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\UserInterface\Response\JsonResponse;
 use App\Shared\UserInterface\View\IdentifierView;
 use App\Shared\UserInterface\View\ResultView;
@@ -27,6 +29,8 @@ final readonly class GeneratePayrollReportController
      * @throws CannotGetBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
+     * @throws CannotGetDepartmentException
+     * @throws InvalidDateTimeException
      */
     #[Route(path: '/payroll-report/generate', methods: [Request::METHOD_POST])]
     public function __invoke(): JsonResponse

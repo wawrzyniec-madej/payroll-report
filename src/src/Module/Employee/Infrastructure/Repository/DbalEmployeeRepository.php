@@ -24,10 +24,6 @@ final readonly class DbalEmployeeRepository implements EmployeeRepositoryInterfa
     ) {
     }
 
-    /**
-     * @throws InvalidDateTimeException
-     * @throws CollectionElementInvalidException
-     */
     public function getAll(): EmployeeCollection
     {
         $builder = $this->connection->createQueryBuilder();

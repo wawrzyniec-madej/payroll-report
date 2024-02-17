@@ -30,12 +30,6 @@ final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesIn
     ) {
     }
 
-    /**
-     * @throws InvalidYearsOfSeniorityException
-     * @throws CollectionElementInvalidException
-     * @throws InvalidDateTimeException
-     * @throws CannotGetDepartmentException
-     */
     public function getAll(): EmployeeCollection
     {
         $results = $this->getAllEmployees->get();

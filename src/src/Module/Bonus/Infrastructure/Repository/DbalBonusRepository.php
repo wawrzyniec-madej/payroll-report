@@ -27,12 +27,6 @@ final readonly class DbalBonusRepository implements BonusRepositoryInterface
     ) {
     }
 
-    /**
-     * @throws UnsupportedBonusTypeException
-     * @throws InvalidYearsOfSeniorityException
-     * @throws BonusNotFoundException
-     * @throws InvalidPercentageException
-     */
     public function getOneById(Identifier $id): BonusInterface
     {
         $builder = $this->connection->createQueryBuilder();

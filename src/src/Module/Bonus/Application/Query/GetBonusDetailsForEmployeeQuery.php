@@ -8,6 +8,7 @@ use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\Interface\BonusRepositoryInterface;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\Employee;
+use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\ValueObject\Identifier;
 
 final readonly class GetBonusDetailsForEmployeeQuery
@@ -21,6 +22,7 @@ final readonly class GetBonusDetailsForEmployeeQuery
      * @throws BonusNotFoundException
      * @throws InvalidYearsOfSeniorityException
      * @throws UnsupportedBonusTypeException
+     * @throws InvalidPercentageException
      */
     public function get(Employee $employee, Identifier $bonusId): BonusDetails
     {

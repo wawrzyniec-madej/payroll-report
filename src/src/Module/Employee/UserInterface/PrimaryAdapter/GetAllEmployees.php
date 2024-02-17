@@ -3,6 +3,8 @@
 namespace App\Module\Employee\UserInterface\PrimaryAdapter;
 
 use App\Module\Employee\Application\Query\GetAllEmployeesQuery;
+use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use App\Shared\Domain\Exception\InvalidDateTimeException;
 
 final readonly class GetAllEmployees
 {
@@ -11,7 +13,11 @@ final readonly class GetAllEmployees
     ) {
     }
 
-    /** @return list<array{id: string, name: string, surname: string, dateOfEmployment: string, departmentId: string, baseSalaryAmount: int, baseSalaryCurrency: string}> */
+    /**
+     * @return list<array{id: string, name: string, surname: string, dateOfEmployment: string, departmentId: string, baseSalaryAmount: int, baseSalaryCurrency: string}>
+     * @throws CollectionElementInvalidException
+     * @throws InvalidDateTimeException
+     */
     public function get(): array
     {
         $employees = $this->getAllEmployeesQuery->get();

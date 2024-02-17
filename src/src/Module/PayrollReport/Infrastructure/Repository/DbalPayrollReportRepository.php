@@ -90,11 +90,6 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
         }
     }
 
-    /**
-     * @throws CollectionElementInvalidException
-     * @throws InvalidDateTimeException
-     * @throws PayrollReportNotFound
-     */
     public function getById(Identifier $id): PayrollReport
     {
         try {

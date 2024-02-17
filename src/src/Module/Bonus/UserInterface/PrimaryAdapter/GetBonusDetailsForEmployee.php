@@ -9,6 +9,7 @@ use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
+use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 
@@ -25,6 +26,7 @@ final readonly class GetBonusDetailsForEmployee
      * @throws BonusNotFoundException
      * @throws InvalidYearsOfSeniorityException
      * @throws UnsupportedBonusTypeException
+     * @throws InvalidPercentageException
      */
     public function get(array $baseSalary, int $yearsOfSeniority, string $bonusId): array
     {
