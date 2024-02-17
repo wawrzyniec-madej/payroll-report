@@ -12,9 +12,13 @@ Endpoint: `/payroll-report/generate`
 
 Endpoint returns generated report `id` to be used in next functionality.
 ### Viewing payroll report
-Endpoint: `/payroll-report/{id}`
+Endpoint: `/payroll-report/{id}/rows`
 
-Can be sorted using query param in format `?sort[sortName]=asc`.
+Can be sorted using query param in format `?sort[sortName]=sortDirection`.
+
+Available sort directions are:
+- asc
+- desc
 
 Available sort names are:
 - name
