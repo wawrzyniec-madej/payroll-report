@@ -1,4 +1,4 @@
-# Payroll application
+# 🪙 Payroll application 🪙
 
 ## Tips:
 1. Communication with docker is handled by Makefile
