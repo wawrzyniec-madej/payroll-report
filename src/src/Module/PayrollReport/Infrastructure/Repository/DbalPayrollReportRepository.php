@@ -13,8 +13,6 @@ use App\Module\PayrollReport\Domain\ValueObject\EmployeeName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
-use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Infrastructure\Exception\DatabaseException;

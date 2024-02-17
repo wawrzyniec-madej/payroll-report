@@ -15,11 +15,6 @@ final class Department extends AggregateRoot
     ) {
     }
 
-    public function getId(): Identifier
-    {
-        return $this->id;
-    }
-
     public function getBonusId(): Identifier
     {
         return $this->bonusId;
@@ -28,5 +23,10 @@ final class Department extends AggregateRoot
     public function getName(): Name
     {
         return $this->name;
+    }
+
+    public function getId(): Identifier
+    {
+        return $this->id;
     }
 }

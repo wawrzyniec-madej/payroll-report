@@ -21,10 +21,6 @@ bash-nginx:
 bash:
 	docker compose exec -it php-fpm bash
 
-.PHONY: build
-build:
-	docker compose build
-
 #Utility
 
 .PHONY: phpstan
@@ -63,12 +59,13 @@ recreate-database:
 
 .PHONY: install
 install:
+	$(MAKE) up
 	docker compose run composer install
 
 .PHONY: tests
 tests:
-	$(MAKE) stan
+	$(MAKE) phpstan
 	$(MAKE) deptrac
-	$(MAKE) recreate-database
 	$(MAKE) unit
-	$(MAKE) functional
+	$(MAKE) recreate-test-database
+	$(MAKE) system

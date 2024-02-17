@@ -15,13 +15,13 @@ abstract class Bonus extends AggregateRoot implements BonusInterface
     ) {
     }
 
-    public function getId(): Identifier
-    {
-        return $this->id;
-    }
-
     public function getName(): BonusTypeEnum
     {
         return $this->name;
+    }
+
+    public function getId(): Identifier
+    {
+        return $this->id;
     }
 }

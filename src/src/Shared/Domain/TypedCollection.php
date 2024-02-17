@@ -26,15 +26,6 @@ abstract class TypedCollection implements IteratorAggregate
         }
     }
 
-    /**
-     * @param list<T> $elements
-     * @throws CollectionElementInvalidException
-     */
-    public static function createFromArray(array $elements): static
-    {
-        return new static($elements);
-    }
-
     /** @throws CollectionElementInvalidException */
     public static function createEmpty(): static
     {

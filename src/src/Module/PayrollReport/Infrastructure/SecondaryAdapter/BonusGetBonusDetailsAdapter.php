@@ -4,13 +4,11 @@ namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
 use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployee;
 use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
-use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\ValueObject\Money;
 use Exception;
 

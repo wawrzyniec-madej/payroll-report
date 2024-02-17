@@ -22,8 +22,7 @@ final readonly class GeneratePayrollReportCommand
         private IdentifierGeneratorInterface $identifierGenerator,
         private AggregateEventDispatcherInterface $aggregateEventDispatcher,
         private GetAllEmployeesInterface $getAllEmployees,
-        private GetBonusDetailsInterface $getBonusDetails,
-        private PayrollReportRepositoryInterface $payrollReportRepository
+        private GetBonusDetailsInterface $getBonusDetails
     ) {
     }
 
@@ -44,8 +43,6 @@ final readonly class GeneratePayrollReportCommand
             $employees,
             $this->getBonusDetails
         );
-
-        $this->payrollReportRepository->save($payrollReport);
 
         $this->aggregateEventDispatcher->dispatch($payrollReport);
 
