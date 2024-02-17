@@ -38,17 +38,24 @@ deptrac:
 
 .PHONY: system
 system:
+	$(MAKE) recreate-test-database
 	docker compose exec php-fpm bin/phpunit --testsuite "System"
 
 .PHONY: unit
 unit:
 	docker compose exec php-fpm bin/phpunit --testsuite "Unit"
 
+.PHONY: recreate-test-database
+recreate-test-database:
+	docker compose exec php-fpm bin/console doctrine:database:drop --force --if-exists --env=test
+	docker compose exec php-fpm bin/console doctrine:database:create -n --env=test
+	docker compose exec php-fpm bin/console doctrine:migrations:migrate -n --allow-no-migration --env=test
+
 .PHONY: recreate-database
 recreate-database:
-	docker compose exec php-fpm bin/console doctrine:database:drop --force --if-exists
-	docker compose exec php-fpm bin/console doctrine:database:create -n
-	docker compose exec php-fpm bin/console doctrine:migrations:migrate -n --allow-no-migration
+	docker compose exec php-fpm bin/console doctrine:database:drop --force --if-exists --env=dev
+	docker compose exec php-fpm bin/console doctrine:database:create -n --env=dev
+	docker compose exec php-fpm bin/console doctrine:migrations:migrate -n --allow-no-migration --env=dev
 
 .PHONY: install
 install:

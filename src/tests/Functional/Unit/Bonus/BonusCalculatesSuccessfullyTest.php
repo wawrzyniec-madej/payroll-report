@@ -27,13 +27,13 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         $details = $bonus->calculateForEmployee($employee);
 
         self::assertEquals(
-            $expectedDetails->getSalaryWithBonus()->getAmount(),
-            $details->getSalaryWithBonus()->getAmount()
+            $expectedDetails->getBonus()->getAmount(),
+            $details->getBonus()->getAmount()
         );
 
         self::assertEquals(
-            $expectedDetails->getBonus()->getAmount(),
-            $details->getBonus()->getAmount()
+            $expectedDetails->getType()->value,
+            $details->getType()->value
         );
     }
 
