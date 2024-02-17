@@ -5,8 +5,9 @@ namespace App\Module\PayrollReport\UserInterface\View;
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\UserInterface\Collection\JsonSerializableCollection;
+use JsonSerializable;
 
-final readonly class PayrollReportView implements \JsonSerializable
+final readonly class PayrollReportView implements JsonSerializable
 {
     public function __construct(
         private PayrollReport $payrollReport

@@ -2,12 +2,15 @@
 
 namespace App\Module\PayrollReport\Domain\Entity;
 
+use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
+use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Domain\ValueObject\Money;
@@ -48,6 +51,11 @@ final readonly class PayrollReportRow
         );
     }
 
+    /**
+     * @throws CannotGetBonusDetailsException
+     * @throws InvalidYearsOfSeniorityException
+     * @throws IncompatibleMoneyException
+     */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         Employee $employee,

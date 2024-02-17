@@ -2,10 +2,10 @@
 
 namespace App\Shared\Domain\ValueObject;
 
-final class Identifier
+final readonly class Identifier
 {
     public function __construct(
-        private readonly string $value
+        private string $value
     ) {
     }
 

@@ -9,9 +9,9 @@ use App\Shared\Domain\ValueObject\Identifier;
 final class Department extends AggregateRoot
 {
     public function __construct(
-        private Identifier $id,
-        private Identifier $bonusId,
-        private Name $name
+        private readonly Identifier $id,
+        private readonly Identifier $bonusId,
+        private readonly Name $name
     ) {
     }
 

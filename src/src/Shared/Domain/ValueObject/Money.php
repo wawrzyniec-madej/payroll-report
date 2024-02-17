@@ -5,11 +5,11 @@ namespace App\Shared\Domain\ValueObject;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 
-final class Money
+final readonly class Money
 {
     public function __construct(
-        private readonly int $amount,
-        private readonly CurrencyEnum $currency
+        private int $amount,
+        private CurrencyEnum $currency
     ) {
     }
 

@@ -11,10 +11,10 @@ use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
-final class DbalDepartmentRepository implements DepartmentRepositoryInterface
+final readonly class DbalDepartmentRepository implements DepartmentRepositoryInterface
 {
     public function __construct(
-        private readonly Connection $connection
+        private Connection $connection
     ) {
     }
 

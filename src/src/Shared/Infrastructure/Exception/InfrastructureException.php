@@ -2,6 +2,8 @@
 
 namespace App\Shared\Infrastructure\Exception;
 
-abstract class InfrastructureException extends \RuntimeException
+use RuntimeException;
+
+abstract class InfrastructureException extends RuntimeException
 {
 }

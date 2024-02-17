@@ -2,10 +2,10 @@
 
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
-final class BonusName
+final readonly class BonusName
 {
     public function __construct(
-        private readonly string $value
+        private string $value
     ) {
     }
 

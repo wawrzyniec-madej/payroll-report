@@ -3,13 +3,16 @@
 namespace App\Shared\Domain;
 
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * This class could be immutable in nature, so add method will return new instance containing new element.
  *
  * @template T of object
  */
-abstract class TypedCollection implements \IteratorAggregate
+abstract class TypedCollection implements IteratorAggregate
 {
     /**
      * @param list<T> $elements
@@ -70,10 +73,10 @@ abstract class TypedCollection implements \IteratorAggregate
         return $element;
     }
 
-    /** @return \ArrayIterator<int, T> */
-    public function getIterator(): \Traversable
+    /** @return ArrayIterator<int, T> */
+    public function getIterator(): Traversable
     {
-        return new \ArrayIterator($this->elements);
+        return new ArrayIterator($this->elements);
     }
 
     /** @return class-string */

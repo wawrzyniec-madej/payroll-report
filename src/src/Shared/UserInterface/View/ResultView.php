@@ -2,10 +2,12 @@
 
 namespace App\Shared\UserInterface\View;
 
-final readonly class ResultView implements \JsonSerializable
+use JsonSerializable;
+
+final readonly class ResultView implements JsonSerializable
 {
     public function __construct(
-        private \JsonSerializable $result
+        private JsonSerializable $result
     ) {
     }
 

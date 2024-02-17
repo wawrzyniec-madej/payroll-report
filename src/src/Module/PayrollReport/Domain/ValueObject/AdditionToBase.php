@@ -7,7 +7,7 @@ use App\Shared\Domain\ValueObject\Money;
 final class AdditionToBase
 {
     public function __construct(
-        private Money $value
+        private readonly Money $value
     ) {
     }
 

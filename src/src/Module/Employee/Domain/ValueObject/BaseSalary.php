@@ -4,10 +4,10 @@ namespace App\Module\Employee\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObject\Money;
 
-final class BaseSalary
+final readonly class BaseSalary
 {
     public function __construct(
-        private readonly Money $value
+        private Money $value
     ) {
     }
 

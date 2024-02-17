@@ -3,8 +3,9 @@
 namespace App\Shared\UserInterface\View;
 
 use App\Shared\Domain\ValueObject\Money;
+use JsonSerializable;
 
-final readonly class MoneyView implements \JsonSerializable
+final readonly class MoneyView implements JsonSerializable
 {
     public function __construct(
         private Money $money

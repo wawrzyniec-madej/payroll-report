@@ -2,7 +2,6 @@
 
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
-use App\Module\Bonus\Domain\Exception\BonusNotFoundException;
 use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployee;
 use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
@@ -23,7 +22,6 @@ final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInter
     }
 
     /**
-     * @throws BonusNotFoundException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
      * @throws CannotGetBonusDetailsException

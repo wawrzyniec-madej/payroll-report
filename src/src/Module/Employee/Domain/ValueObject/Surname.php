@@ -2,10 +2,10 @@
 
 namespace App\Module\Employee\Domain\ValueObject;
 
-final class Surname
+final readonly class Surname
 {
     public function __construct(
-        private readonly string $value
+        private string $value
     ) {
     }
 

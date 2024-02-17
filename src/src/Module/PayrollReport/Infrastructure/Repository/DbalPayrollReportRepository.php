@@ -20,6 +20,7 @@ use App\Shared\Domain\ValueObject\Money;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
 use Exception;
+use Throwable;
 
 final readonly class DbalPayrollReportRepository implements PayrollReportRepositoryInterface
 {
@@ -84,7 +85,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                         ->executeStatement();
                 }
             });
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             throw DatabaseException::fromPrevious($throwable);
         }
     }

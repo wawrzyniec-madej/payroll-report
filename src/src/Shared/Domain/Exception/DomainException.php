@@ -2,6 +2,8 @@
 
 namespace App\Shared\Domain\Exception;
 
-abstract class DomainException extends \LogicException
+use LogicException;
+
+abstract class DomainException extends LogicException
 {
 }
