@@ -29,28 +29,6 @@ final readonly class PayrollReportRow
     ) {
     }
 
-    public static function recreate(
-        Identifier $id,
-        EmployeeName $employeeName,
-        EmployeeSurname $employeeSurname,
-        Money $remunerationBase,
-        DepartmentName $departmentName,
-        BonusName $bonusName,
-        Money $additionToBase,
-        Money $salaryWithBonus
-    ): self {
-        return new self(
-            $id,
-            $employeeName,
-            $employeeSurname,
-            $remunerationBase,
-            $departmentName,
-            $bonusName,
-            $additionToBase,
-            $salaryWithBonus,
-        );
-    }
-
     /**
      * @throws CannotGetBonusDetailsException
      * @throws InvalidYearsOfSeniorityException

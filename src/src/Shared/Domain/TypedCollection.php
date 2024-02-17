@@ -52,15 +52,6 @@ abstract class TypedCollection implements IteratorAggregate
         return $this;
     }
 
-    /** @return list<mixed> */
-    public function map(callable $function): array
-    {
-        return array_map(
-            $function,
-            $this->elements
-        );
-    }
-
     /** @throws CollectionElementInvalidException */
     private function validate(object $element): object
     {

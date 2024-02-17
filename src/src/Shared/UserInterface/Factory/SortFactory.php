@@ -34,7 +34,7 @@ final class SortFactory
 
         $providedSortName = new SortName(array_keys($parameter)[0]);
 
-        if (!$allowedSortNames->containts($providedSortName)) {
+        if (!$allowedSortNames->contains($providedSortName)) {
             return null;
         }
 

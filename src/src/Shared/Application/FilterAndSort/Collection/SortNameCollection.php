@@ -13,7 +13,7 @@ final class SortNameCollection extends TypedCollection
         return SortName::class;
     }
 
-    public function containts(SortName $sortName): bool
+    public function contains(SortName $sortName): bool
     {
         foreach ($this as $element) {
             if ($element->isEqual($sortName)) {
