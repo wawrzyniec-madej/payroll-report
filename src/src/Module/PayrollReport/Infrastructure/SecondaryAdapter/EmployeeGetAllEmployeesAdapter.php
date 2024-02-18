@@ -19,6 +19,7 @@ use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
+use Exception;
 
 final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesInterface
 {
@@ -38,7 +39,7 @@ final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesIn
 
             try {
                 $department = $this->getDepartmentById->get($departmentId->getValue());
-            } catch (\Exception) {
+            } catch (Exception) {
                 throw CannotGetDepartmentException::create($departmentId);
             }
 

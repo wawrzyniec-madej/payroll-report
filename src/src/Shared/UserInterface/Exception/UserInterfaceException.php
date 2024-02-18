@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Shared\UserInterface\Exception;
 
-abstract class UserInterfaceException extends \RuntimeException
+use RuntimeException;
+
+abstract class UserInterfaceException extends RuntimeException
 {
 }
