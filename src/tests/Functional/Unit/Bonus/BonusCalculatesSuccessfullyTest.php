@@ -44,35 +44,11 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
 
     private function successfulDataProvider(): Generator
     {
-        $tenPercentBonus = new PercentageBonus(
-            IdentifierHelper::generateUlid(),
-            new Percentage(10)
-        );
-
-        $onePercentBonus = new PercentageBonus(
-            IdentifierHelper::generateUlid(),
-            new Percentage(1)
-        );
-
-        $irregularPercentBonus = new PercentageBonus(
-            IdentifierHelper::generateUlid(),
-            new Percentage(39)
-        );
-
-        $tenYearSeniorityBonus = new SeniorityBonus(
-            IdentifierHelper::generateUlid(),
-            new Money(10000, CurrencyEnum::USD),
-            new YearsOfSeniority(10)
-        );
-
-        $threeYearSeniorityBonus = new SeniorityBonus(
-            IdentifierHelper::generateUlid(),
-            new Money(100000, CurrencyEnum::USD),
-            new YearsOfSeniority(3)
-        );
-
         yield [
-            $irregularPercentBonus,
+            new PercentageBonus(
+                IdentifierHelper::generateUlid(),
+                new Percentage(39)
+            ),
             new Money(153321, CurrencyEnum::USD),
             new YearsOfSeniority(1),
             new BonusDetails(
@@ -82,7 +58,10 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         ];
 
         yield [
-            $onePercentBonus,
+            new PercentageBonus(
+                IdentifierHelper::generateUlid(),
+                new Percentage(1)
+            ),
             new Money(100000, CurrencyEnum::USD),
             new YearsOfSeniority(30),
             new BonusDetails(
@@ -92,7 +71,10 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         ];
 
         yield [
-            $tenPercentBonus,
+            new PercentageBonus(
+                IdentifierHelper::generateUlid(),
+                new Percentage(10)
+            ),
             new Money(1000, CurrencyEnum::USD),
             new YearsOfSeniority(5),
             new BonusDetails(
@@ -102,7 +84,11 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         ];
 
         yield [
-            $threeYearSeniorityBonus,
+            new SeniorityBonus(
+                IdentifierHelper::generateUlid(),
+                new Money(100000, CurrencyEnum::USD),
+                new YearsOfSeniority(3)
+            ),
             new Money(100000, CurrencyEnum::USD),
             new YearsOfSeniority(5),
             new BonusDetails(
@@ -112,29 +98,41 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         ];
 
         yield [
-            $tenYearSeniorityBonus,
-            new Money(100000, CurrencyEnum::USD),
+            new SeniorityBonus(
+                IdentifierHelper::generateUlid(),
+                new Money(10000, CurrencyEnum::PLN),
+                new YearsOfSeniority(10)
+            ),
+            new Money(100000, CurrencyEnum::PLN),
             new YearsOfSeniority(15),
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
-                new Money(100000, CurrencyEnum::USD),
+                new Money(100000, CurrencyEnum::PLN),
             ),
         ];
 
         yield [
-            $tenYearSeniorityBonus,
+            new SeniorityBonus(
+                IdentifierHelper::generateUlid(),
+                new Money(5000, CurrencyEnum::USD),
+                new YearsOfSeniority(10)
+            ),
             new Money(100000, CurrencyEnum::USD),
             new YearsOfSeniority(5),
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
-                new Money(50000, CurrencyEnum::USD),
+                new Money(25000, CurrencyEnum::USD),
             ),
         ];
 
         yield [
-            $tenYearSeniorityBonus,
+            new SeniorityBonus(
+                IdentifierHelper::generateUlid(),
+                new Money(5000, CurrencyEnum::USD),
+                new YearsOfSeniority(10)
+            ),
             new Money(100000, CurrencyEnum::USD),
-            new YearsOfSeniority(1),
+            new YearsOfSeniority(2),
             new BonusDetails(
                 BonusTypeEnum::SENIORITY,
                 new Money(10000, CurrencyEnum::USD),
