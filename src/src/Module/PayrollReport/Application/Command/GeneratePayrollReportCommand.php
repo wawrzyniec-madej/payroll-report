@@ -5,15 +5,10 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\Application\Command;
 
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
-use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
-use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
-use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Shared\Application\Interface\TransactionInterface;
-use App\Shared\Domain\Exception\IncompatibleMoneyException;
-use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
@@ -31,22 +26,9 @@ final readonly class GeneratePayrollReportCommand
     ) {
     }
 
-    /**
-     * @throws CannotCalculateBonusDetailsException
-     * @throws InvalidYearsOfSeniorityException
-     * @throws IncompatibleMoneyException
-     * @throws CannotGetDepartmentException
-     * @throws InvalidDateTimeException
-     */
     public function generate(): Identifier
     {
-        /**
-         * @throws CannotCalculateBonusDetailsException
-         * @throws InvalidYearsOfSeniorityException
-         * @throws IncompatibleMoneyException
-         * @throws CannotGetDepartmentException
-         * @throws InvalidDateTimeException
-         */
+        /* This doesn't work with my phpstan setup, as stan does not report exceptions from callables, even if they are executed at once */
         return $this->transaction->start(function (): Identifier {
             $employees = $this->getAllEmployees->getAll();
 
