@@ -14,5 +14,5 @@ interface TransactionInterface
     /** @return T */
     public function start(Closure $method): mixed;
 
-    public function end(): void;
+    public function getId(): string;
 }
