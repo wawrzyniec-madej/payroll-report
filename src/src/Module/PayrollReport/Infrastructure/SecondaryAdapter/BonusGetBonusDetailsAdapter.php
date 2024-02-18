@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
 use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployeeAdapter;

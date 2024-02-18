@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Department\UserInterface\PrimaryAdapter;
 
 use App\Module\Department\Application\Query\GetDepartmentByIdQuery;

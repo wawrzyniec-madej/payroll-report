@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional\Unit\Bonus;
 
 use App\Module\Bonus\Domain\Entity\PercentageBonus;

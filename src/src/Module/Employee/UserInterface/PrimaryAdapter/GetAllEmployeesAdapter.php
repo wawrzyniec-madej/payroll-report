@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Employee\UserInterface\PrimaryAdapter;
 
 use App\Module\Employee\Application\Query\GetAllEmployeesQuery;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\UserInterface\Request;
 
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;

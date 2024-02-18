@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Department\Infrastructure\Repository;
 
 use App\Module\Department\Domain\Entity\Department;

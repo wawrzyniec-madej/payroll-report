@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Domain\Entity;
 
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;

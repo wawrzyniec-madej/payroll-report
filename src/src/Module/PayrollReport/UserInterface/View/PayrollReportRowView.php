@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\UserInterface\View;
 
 use App\Module\PayrollReport\Application\DTO\PayrollReportRowDTO;

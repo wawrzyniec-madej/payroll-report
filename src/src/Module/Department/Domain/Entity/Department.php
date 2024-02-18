@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Department\Domain\Entity;
 
 use App\Module\Department\Domain\ValueObject\Name;

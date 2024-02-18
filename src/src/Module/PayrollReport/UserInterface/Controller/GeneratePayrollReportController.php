@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\UserInterface\Controller;
 
 use App\Module\PayrollReport\Application\Command\GeneratePayrollReportCommand;

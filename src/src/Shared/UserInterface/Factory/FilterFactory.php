@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\UserInterface\Factory;
 
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;

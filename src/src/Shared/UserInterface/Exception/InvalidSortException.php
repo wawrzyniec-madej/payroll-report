@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\UserInterface\Exception;
 
 final class InvalidSortException extends UserInterfaceException

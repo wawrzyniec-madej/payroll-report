@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Infrastructure\EventListener;
 
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;

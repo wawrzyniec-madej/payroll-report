@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Infrastructure\Search\PayrollReportRows\FilterApplier;
 
 use App\Shared\Application\FilterAndSort\Filter;

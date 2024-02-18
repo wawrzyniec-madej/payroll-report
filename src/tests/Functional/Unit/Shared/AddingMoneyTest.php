@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional\Unit\Shared;
 
 use App\Shared\Domain\Enum\CurrencyEnum;

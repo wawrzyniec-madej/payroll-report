@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Employee\Domain\Collection;
 
 use App\Module\Employee\Domain\Entity\Employee;

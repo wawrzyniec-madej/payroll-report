@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Bonus\UserInterface\PrimaryAdapter;
 
 use App\Module\Bonus\Application\Query\GetBonusDetailsForEmployeeQuery;

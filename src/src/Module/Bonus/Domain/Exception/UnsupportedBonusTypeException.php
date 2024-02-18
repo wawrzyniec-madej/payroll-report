@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\Bonus\Domain\Exception;
 
 use App\Module\Bonus\Domain\Enum\BonusTypeEnum;

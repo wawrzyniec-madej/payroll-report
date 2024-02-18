@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\UserInterface\Response;
 
 use Symfony\Component\HttpFoundation\JsonResponse as BaseJsonResponse;

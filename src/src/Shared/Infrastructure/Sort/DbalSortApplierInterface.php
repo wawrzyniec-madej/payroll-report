@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infrastructure\Sort;
 
 use App\Shared\Application\FilterAndSort\Sort;
