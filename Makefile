@@ -3,6 +3,7 @@
 .PHONY: up
 up:
 	docker compose up -d
+	docker compose exec php-fpm sh -c "chmod +x ./bin/*"
 
 .PHONY: down
 down:
@@ -38,7 +39,6 @@ cs-fix:
 
 .PHONY: test-acceptance
 test-acceptance:
-	$(MAKE) recreate-test-database
 	docker compose exec php-fpm bin/phpunit --testsuite "Acceptance"
 
 .PHONY: test-unit
@@ -76,5 +76,6 @@ setup:
 tests:
 	$(MAKE) phpstan
 	$(MAKE) deptrac
+	$(MAKE) recreate-test-database
 	$(MAKE) test-unit
 	$(MAKE) test-acceptance
