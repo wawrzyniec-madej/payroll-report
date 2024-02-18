@@ -11,6 +11,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         'declare_strict_types' => true,
+        'final_class' => true,
     ])
     ->setFinder($finder)
 ;
