@@ -35,7 +35,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                     ])
                     ->executeStatement();
 
-                /* @todo refactor to multiple values at once */
+                /* this could  be made into multiple rows in one insert statement */
                 foreach ($payrollReport->getRows() as $payrollReportRow) {
                     $builder
                         ->insert('payroll_report_row')

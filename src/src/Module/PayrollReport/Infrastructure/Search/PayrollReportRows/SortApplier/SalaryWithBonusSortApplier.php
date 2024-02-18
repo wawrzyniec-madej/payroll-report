@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Infrastructure\Search\PayrollReportRows\SortApplier;
 
+use App\Module\PayrollReport\Infrastructure\Search\PayrollReportRows\DbalSearchPayrollReportRow;
 use App\Shared\Application\FilterAndSort\Sort;
-use App\Shared\Infrastructure\Sort\DbalSortApplierInterface;
+use App\Shared\Infrastructure\FilterAndSort\DbalSortApplierInterface;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 final class SalaryWithBonusSortApplier implements DbalSortApplierInterface
@@ -15,8 +16,10 @@ final class SalaryWithBonusSortApplier implements DbalSortApplierInterface
         $builder->orderBy('prr.salary_with_bonus_amount', $sort->getDirection()->value);
     }
 
-    public function supports(Sort $sort): bool
+    public function supports(object $finder, Sort $sort): bool
     {
-        return 'salaryWithBonus' === $sort->getName()->getValue();
+        return
+            'salaryWithBonus' === $sort->getName()->getValue()
+            && $finder instanceof DbalSearchPayrollReportRow;
     }
 }
