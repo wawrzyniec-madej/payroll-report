@@ -13,13 +13,13 @@ abstract class Bonus extends AggregateRoot implements BonusInterface
 {
     public function __construct(
         private readonly Identifier $id,
-        private readonly BonusTypeEnum $name
+        private readonly BonusTypeEnum $type
     ) {
     }
 
-    public function getName(): BonusTypeEnum
+    public function getType(): BonusTypeEnum
     {
-        return $this->name;
+        return $this->type;
     }
 
     public function getId(): Identifier

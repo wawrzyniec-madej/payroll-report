@@ -26,7 +26,7 @@ final class PercentageBonus extends Bonus
     public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority): BonusDetails
     {
         return new BonusDetails(
-            $this->getName(),
+            $this->getType(),
             new Money(
                 (int) floor($remunerationBase->getAmount() * $this->percentage->getFloat()),
                 $remunerationBase->getCurrency()

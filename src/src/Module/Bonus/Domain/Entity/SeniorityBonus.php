@@ -26,7 +26,7 @@ final class SeniorityBonus extends Bonus
     public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority): BonusDetails
     {
         return new BonusDetails(
-            $this->getName(),
+            $this->getType(),
             $this->calculateYearlyBonusFromSeniority($yearsOfSeniority)
         );
     }
