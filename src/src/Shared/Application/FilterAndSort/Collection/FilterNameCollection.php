@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Application\FilterAndSort\Collection;
 
 use App\Shared\Application\FilterAndSort\FilterName;
-use App\Shared\TypedCollection;
+use App\Shared\Components\TypedCollection;
 
 /** @extends TypedCollection<FilterName> */
 final class FilterNameCollection extends TypedCollection

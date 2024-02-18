@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\Domain\Collection;
 
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
-use App\Shared\TypedCollection;
+use App\Shared\Components\TypedCollection;
 
 /** @extends TypedCollection<Employee> */
 final class EmployeeCollection extends TypedCollection

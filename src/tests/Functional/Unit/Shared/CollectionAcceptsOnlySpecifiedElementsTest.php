@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Unit\Shared;
 
-use App\Shared\InvalidCollectionElementException;
+use App\Shared\Components\InvalidCollectionElementException;
 use App\Tests\Helper\ClassA;
 use App\Tests\Helper\ClassACollection;
 use App\Tests\Helper\ClassB;

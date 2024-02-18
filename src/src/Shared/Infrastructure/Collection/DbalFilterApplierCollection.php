@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Collection;
 
+use App\Shared\Components\TypedCollection;
 use App\Shared\Infrastructure\FilterAndSort\DbalFilterApplierInterface;
-use App\Shared\TypedCollection;
 
 /** @extends TypedCollection<DbalFilterApplierInterface> */
 final class DbalFilterApplierCollection extends TypedCollection

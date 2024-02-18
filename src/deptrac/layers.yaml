@@ -14,6 +14,11 @@ parameters:
         - type: classLike
           value: '.*App\\Module\\.*\\Infrastructure\\SecondaryAdapter\\.*'
 
+    - name: SharedComponents
+      collectors:
+        - type: classLike
+          value: '.*App\\Shared\\Components\\.*'
+
     - name: Application
       collectors:
         - type: classLike
@@ -67,9 +72,12 @@ parameters:
               value: PrimaryAdapters
             - type: layer
               value: SecondaryAdapters
+            - type: layer
+              value: SharedComponents
   ruleset:
-    Application: [ Domain ]
-    Infrastructure: [ Application, Domain, Other ]
-    UserInterface: [ Application, Domain, Other ]
+    Domain: [ SharedComponents ]
+    Application: [ Domain, SharedComponents ]
+    Infrastructure: [ Application, Domain, Other, SharedComponents ]
+    UserInterface: [ Application, Domain, Other, SharedComponents ]
     SecondaryAdapters: [ +Infrastructure, PrimaryAdapters ]
     PrimaryAdapters: [ +UserInterface ]
