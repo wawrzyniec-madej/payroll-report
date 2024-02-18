@@ -28,13 +28,19 @@ final readonly class Money
     /** @throws IncompatibleMoneyException */
     public function add(Money $money): self
     {
-        if (!$this->currency->isEqual($money->currency)) {
-            throw IncompatibleMoneyException::create($money->currency, $this->currency);
-        }
+        $this->validateCurrency($money);
 
         return new Money(
             $this->amount + $money->amount,
             $this->currency
         );
+    }
+
+    /** @throws IncompatibleMoneyException */
+    public function validateCurrency(self $compared): void
+    {
+        if (!$this->currency->isEqual($compared->currency)) {
+            throw IncompatibleMoneyException::create($compared->currency, $this->currency);
+        }
     }
 }

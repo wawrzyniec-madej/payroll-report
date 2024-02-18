@@ -11,6 +11,7 @@ use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\Interface\BonusRepositoryInterface;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
+use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
@@ -26,6 +27,7 @@ final readonly class CalculateBonusDetailsQuery
      * @throws InvalidYearsOfSeniorityException
      * @throws UnsupportedBonusTypeException
      * @throws InvalidPercentageException
+     * @throws IncompatibleMoneyException
      */
     public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority, Identifier $bonusId): BonusDetails
     {

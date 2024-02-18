@@ -140,5 +140,19 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
                 new Money(10000, CurrencyEnum::USD),
             ),
         ];
+
+        yield [
+            new SeniorityBonus(
+                IdentifierHelper::generateUlid(),
+                new Money(100000, CurrencyEnum::PLN),
+                new YearsOfSeniority(15),
+            ),
+            new Money(500000, CurrencyEnum::PLN),
+            new YearsOfSeniority(20),
+            new BonusDetails(
+                BonusTypeEnum::SENIORITY,
+                new Money(1500000, CurrencyEnum::PLN),
+            ),
+        ];
     }
 }
