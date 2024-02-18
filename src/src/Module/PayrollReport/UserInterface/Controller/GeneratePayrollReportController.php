@@ -11,8 +11,7 @@ use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\UserInterface\View\IdentifierView;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
-use App\Shared\UserInterface\Response\SuccessResponse;
-use App\Shared\UserInterface\View\ResultView;
+use App\Shared\UserInterface\Response\ResultResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -33,14 +32,10 @@ final readonly class GeneratePayrollReportController
      * @throws InvalidDateTimeException
      */
     #[Route(path: '/payroll-report/generate', methods: [Request::METHOD_POST])]
-    public function __invoke(): SuccessResponse
+    public function __invoke(): ResultResponse
     {
         $payrollReportIdentifier = $this->generatePayrollReportCommand->generate();
 
-        return new SuccessResponse(
-            new ResultView(
-                new IdentifierView($payrollReportIdentifier)
-            )
-        );
+        return new ResultResponse(new IdentifierView($payrollReportIdentifier));
     }
 }

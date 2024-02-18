@@ -14,5 +14,11 @@ final class SearchPayrollReportRowsExitsGracefullyOnInvalidSortTest extends ApiT
         );
 
         self::assertResponseStatusCodeSame(400);
+        self::assertEquals(
+            [
+                'message' => 'Sort [name] with value [invalid_criterion] is invalid.',
+            ],
+            $this->getJsonResponseData()
+        );
     }
 }

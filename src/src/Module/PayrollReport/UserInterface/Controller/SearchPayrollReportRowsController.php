@@ -10,8 +10,7 @@ use App\Module\PayrollReport\UserInterface\View\PayrollReportRowView;
 use App\Shared\UserInterface\Collection\JsonSerializableCollection;
 use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Response\BadRequestResponse;
-use App\Shared\UserInterface\Response\SuccessResponse;
-use App\Shared\UserInterface\View\ResultView;
+use App\Shared\UserInterface\Response\ResultResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -45,8 +44,6 @@ final readonly class SearchPayrollReportRowsController
             );
         }
 
-        return new SuccessResponse(
-            new ResultView($payrollReportRowViews)
-        );
+        return new ResultResponse($payrollReportRowViews);
     }
 }
