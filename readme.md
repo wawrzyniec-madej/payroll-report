@@ -2,7 +2,7 @@
 
 ## Before you start:
 - Communication with docker is handled by Makefile
-- Docker configuration was tested on windows with wsl 
+- Docker configuration was tested on windows with wsl and mac
 - If you need to generate app compatible id use `make identifier`
 
 
