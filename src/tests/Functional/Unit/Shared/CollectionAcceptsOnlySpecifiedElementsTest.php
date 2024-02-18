@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Unit\Shared;
 
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
+use App\Shared\InvalidCollectionElementException;
 use App\Tests\Helper\ClassA;
 use App\Tests\Helper\ClassACollection;
 use App\Tests\Helper\ClassB;
@@ -14,7 +14,7 @@ final class CollectionAcceptsOnlySpecifiedElementsTest extends TestCase
 {
     public function testThrowsExceptionOnImproperElement(): void
     {
-        $this->expectException(CollectionElementInvalidException::class);
+        $this->expectException(InvalidCollectionElementException::class);
 
         $collection = ClassACollection::createEmpty();
 

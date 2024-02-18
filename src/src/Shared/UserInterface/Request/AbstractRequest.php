@@ -6,7 +6,6 @@ namespace App\Shared\UserInterface\Request;
 
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
 use App\Shared\Application\FilterAndSort\Sort;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Factory\FilterFactory;
 use App\Shared\UserInterface\Factory\SortFactory;
@@ -33,7 +32,6 @@ abstract readonly class AbstractRequest implements RequestInterface, FilterableR
         );
     }
 
-    /** @throws CollectionElementInvalidException */
     public function getFilters(): FilterCollection
     {
         return $this->filterFactory->create(
@@ -43,7 +41,6 @@ abstract readonly class AbstractRequest implements RequestInterface, FilterableR
     }
 
     /**
-     * @throws CollectionElementInvalidException
      * @throws InvalidSortException
      */
     public function getSort(): ?Sort

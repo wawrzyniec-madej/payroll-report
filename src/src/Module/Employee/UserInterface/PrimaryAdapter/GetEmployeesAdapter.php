@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Module\Employee\UserInterface\PrimaryAdapter;
 
 use App\Module\Employee\Application\Query\GetAllEmployeesQuery;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 
 final readonly class GetEmployeesAdapter
@@ -18,7 +17,6 @@ final readonly class GetEmployeesAdapter
     /**
      * @return list<array{id: string, name: string, surname: string, dateOfEmployment: string, departmentId: string, baseSalaryAmount: int, baseSalaryCurrency: string}>
      *
-     * @throws CollectionElementInvalidException
      * @throws InvalidDateTimeException
      */
     public function get(): array

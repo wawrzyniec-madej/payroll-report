@@ -9,7 +9,6 @@ use App\Module\PayrollReport\Application\DTO\PayrollReportRowDTO;
 use App\Module\PayrollReport\Application\Interface\SearchPayrollReportRowsInterface;
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
 use App\Shared\Application\FilterAndSort\Sort;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use App\Shared\Infrastructure\FilterAndSort\DbalFilterApplierChain;
@@ -26,7 +25,6 @@ final readonly class DbalSearchPayrollReportRow implements SearchPayrollReportRo
     ) {
     }
 
-    /** @throws CollectionElementInvalidException */
     public function search(Identifier $id, FilterCollection $filters, ?Sort $sort): PayrollReportRowDTOCollection
     {
         $builder = $this->connection->createQueryBuilder()

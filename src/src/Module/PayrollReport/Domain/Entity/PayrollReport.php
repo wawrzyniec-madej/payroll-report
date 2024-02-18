@@ -14,7 +14,6 @@ use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
@@ -29,7 +28,6 @@ final class PayrollReport extends AggregateRoot
     }
 
     /**
-     * @throws CollectionElementInvalidException
      * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
@@ -77,7 +75,6 @@ final class PayrollReport extends AggregateRoot
         return $this->rows;
     }
 
-    /** @throws CollectionElementInvalidException */
     public function addRow(PayrollReportRow $row): self
     {
         $this->rows->add($row);

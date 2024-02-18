@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\EventDispatcher;
 
 use App\Shared\Domain\AggregateRoot;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -16,7 +15,6 @@ final readonly class SymfonyEventDispatcher implements AggregateEventDispatcherI
     ) {
     }
 
-    /** @throws CollectionElementInvalidException */
     public function dispatch(AggregateRoot $aggregateRoot): void
     {
         foreach ($aggregateRoot->pullEvents() as $event) {

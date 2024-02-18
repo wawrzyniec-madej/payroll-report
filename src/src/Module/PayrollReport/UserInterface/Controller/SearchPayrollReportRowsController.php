@@ -7,7 +7,6 @@ namespace App\Module\PayrollReport\UserInterface\Controller;
 use App\Module\PayrollReport\Application\Query\SearchPayrollReportRowsQuery;
 use App\Module\PayrollReport\UserInterface\Request\GetPayrollReportRequest;
 use App\Module\PayrollReport\UserInterface\View\PayrollReportRowView;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\UserInterface\Collection\JsonSerializableCollection;
 use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Response\BadRequestResponse;
@@ -26,9 +25,6 @@ final readonly class SearchPayrollReportRowsController
     ) {
     }
 
-    /**
-     * @throws CollectionElementInvalidException
-     */
     #[Route(path: '/payroll-report/{id}/rows', methods: [Request::METHOD_GET])]
     public function __invoke(GetPayrollReportRequest $request): Response
     {

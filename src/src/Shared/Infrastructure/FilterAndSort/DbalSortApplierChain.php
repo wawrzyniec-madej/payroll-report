@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\FilterAndSort;
 
 use App\Shared\Application\FilterAndSort\Sort;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Infrastructure\Collection\DbalSortApplierCollection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
@@ -16,8 +15,6 @@ final class DbalSortApplierChain
 
     /**
      * @param iterable<DbalFilterApplierInterface> $dbalSortAppliers
-     *
-     * @throws CollectionElementInvalidException
      */
     public function __construct(
         #[TaggedIterator(tag: 'app.dbal_sort_applier')]

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\UserInterface\ValueResolver;
 
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
-use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Factory\FilterFactory;
 use App\Shared\UserInterface\Factory\SortFactory;
 use App\Shared\UserInterface\Interface\RequestInterface;

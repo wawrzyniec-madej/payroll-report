@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Collection;
+namespace App\Shared;
 
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
@@ -18,8 +17,6 @@ abstract class TypedCollection implements IteratorAggregate
 {
     /**
      * @param list<T> $elements
-     *
-     * @throws CollectionElementInvalidException
      */
     final private function __construct(
         protected array $elements
@@ -29,13 +26,11 @@ abstract class TypedCollection implements IteratorAggregate
         }
     }
 
-    /** @throws CollectionElementInvalidException */
     public static function createEmpty(): static
     {
         return new static([]);
     }
 
-    /** @throws CollectionElementInvalidException */
     public static function createFromSpread(object ...$elements): static
     {
         /** @var list<T> $listedElements */
@@ -44,7 +39,6 @@ abstract class TypedCollection implements IteratorAggregate
         return new static($listedElements);
     }
 
-    /** @throws CollectionElementInvalidException */
     public function add(object $element): static
     {
         /** @var T $validatedElement */
@@ -55,13 +49,12 @@ abstract class TypedCollection implements IteratorAggregate
         return $this;
     }
 
-    /** @throws CollectionElementInvalidException */
     private function validate(object $element): object
     {
         $allowedType = $this->typeAllowed();
 
         if (!$element instanceof $allowedType) {
-            throw CollectionElementInvalidException::create($element::class, $allowedType);
+            throw InvalidCollectionElementException::create($element::class, $allowedType);
         }
 
         return $element;

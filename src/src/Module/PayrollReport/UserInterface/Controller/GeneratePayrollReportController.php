@@ -9,7 +9,6 @@ use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsExcepti
 use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\UserInterface\View\IdentifierView;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\UserInterface\Response\SuccessResponse;
@@ -27,7 +26,6 @@ final readonly class GeneratePayrollReportController
     }
 
     /**
-     * @throws CollectionElementInvalidException
      * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException

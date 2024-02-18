@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Exception;
+namespace App\Shared;
 
-final class CollectionElementInvalidException extends DomainException
+use RuntimeException;
+
+final class InvalidCollectionElementException extends RuntimeException
 {
     /**
      * @param class-string $provided
