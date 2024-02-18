@@ -1,0 +1,54 @@
+imports:
+  - base.yaml
+  - modules.baseline.yaml
+
+parameters:
+  layers:
+    - name: Bonus
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\Bonus\\.*'
+
+    - name: Department
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\Department\\.*'
+
+    - name: Employee
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\Employee\\.*'
+
+    - name: PayrollReport
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\PayrollReport\\.*'
+
+    - name: Utility
+      collectors:
+        - type: classLike
+          value: '.*App\\Module\\Utility\\.*'
+
+    - name: Other
+      collectors:
+        - type: bool
+          must:
+            - type: classLike
+              value: '.*\\.*'
+          must_not:
+            - type: layer
+              value: Bonus
+            - type: layer
+              value: Department
+            - type: layer
+              value: Employee
+            - type: layer
+              value: PayrollReport
+            - type: layer
+              value: Utility
+  ruleset:
+    Bonus: [ Other ]
+    Department: [ Other ]
+    Employee: [ Other ]
+    PayrollReport: [ Other ]
+    Utility: [ Other ]

@@ -1,1 +1,2 @@
-parameters:
+deptrac:
+  skip_violations:

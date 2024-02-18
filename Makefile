@@ -29,8 +29,8 @@ phpstan:
 
 .PHONY: deptrac
 deptrac:
-	docker compose exec php-fpm \
-    	vendor/bin/deptrac --config-file=deptrac/layers.yaml --fail-on-uncovered --report-uncovered
+	docker compose exec php-fpm vendor/bin/deptrac --config-file=deptrac/layers.yaml --fail-on-uncovered --report-uncovered
+	docker compose exec php-fpm vendor/bin/deptrac --config-file=deptrac/modules.yaml --fail-on-uncovered --report-uncovered
 
 .PHONY: cs-fix
 cs-fix:

@@ -8,16 +8,19 @@ parameters:
       collectors:
         - type: classLike
           value: '.*App\\Module\\.*\\UserInterface\\PrimaryAdapter\\.*'
+
     - name: SecondaryAdapters
       collectors:
         - type: classLike
           value: '.*App\\Module\\.*\\Infrastructure\\SecondaryAdapter\\.*'
+
     - name: Application
       collectors:
         - type: classLike
           value: '.*App\\Module\\.*\\Application\\.*'
         - type: classLike
           value: '.*App\\Shared\\Application\\.*'
+
     - name: UserInterface
       collectors:
         - type: bool
@@ -27,6 +30,7 @@ parameters:
           must_not:
             - type: layer
               value: PrimaryAdapters
+
     - name: Infrastructure
       collectors:
         - type: bool
@@ -36,12 +40,14 @@ parameters:
           must_not:
             - type: layer
               value: SecondaryAdapters
+
     - name: Domain
       collectors:
         - type: classLike
           value: '.*App\\Module\\.*\\Domain\\.*'
         - type: classLike
           value: '.*App\\Shared\\Domain\\.*'
+
     - name: Other
       collectors:
         - type: bool
