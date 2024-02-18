@@ -7,7 +7,7 @@ namespace App\Shared\Application\Interface;
 use Closure;
 
 /**
- * @template T of mixed
+ * @template T
  */
 interface TransactionInterface
 {
