@@ -21,7 +21,7 @@ final class DepartmentFilterApplier implements DbalFilterApplierInterface
     public function supports(object $finder, Filter $filter): bool
     {
         return
-            'department' === $filter->getName()
+            'department' === $filter->getName()->getValue()
             && $finder instanceof DbalSearchPayrollReportRow;
     }
 }

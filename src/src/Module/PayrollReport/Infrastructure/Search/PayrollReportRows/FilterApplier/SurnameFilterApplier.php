@@ -21,7 +21,7 @@ final class SurnameFilterApplier implements DbalFilterApplierInterface
     public function supports(object $finder, Filter $filter): bool
     {
         return
-            'surname' === $filter->getName()
+            'surname' === $filter->getName()->getValue()
             && $finder instanceof DbalSearchPayrollReportRow;
     }
 }

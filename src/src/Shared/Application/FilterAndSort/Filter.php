@@ -8,7 +8,7 @@ namespace App\Shared\Application\FilterAndSort;
 final readonly class Filter
 {
     public function __construct(
-        private string $name,
+        private FilterName $name,
         private string $value
     ) {
     }
@@ -18,7 +18,7 @@ final readonly class Filter
         return $this->value;
     }
 
-    public function getName(): string
+    public function getName(): FilterName
     {
         return $this->name;
     }

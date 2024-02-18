@@ -29,7 +29,7 @@ final class FilterFactory
                 }
 
                 $filters->add(
-                    new Filter($filterName->getValue(), $value)
+                    new Filter($filterName, $value)
                 );
             }
         }
