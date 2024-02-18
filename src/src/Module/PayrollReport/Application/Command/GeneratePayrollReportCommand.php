@@ -11,6 +11,7 @@ use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
+use App\Shared\Application\Interface\TransactionInterface;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
@@ -19,12 +20,14 @@ use App\Shared\Domain\ValueObject\Identifier;
 
 final readonly class GeneratePayrollReportCommand
 {
+    /** @param TransactionInterface<Identifier> $transaction */
     public function __construct(
         private IdentifierGeneratorInterface $identifierGenerator,
         private AggregateEventDispatcherInterface $aggregateEventDispatcher,
         private GetAllEmployeesInterface $getAllEmployees,
         private CalculateBonusDetailsInterface $getBonusDetails,
-        private GetDepartmentInterface $getDepartment
+        private GetDepartmentInterface $getDepartment,
+        private TransactionInterface $transaction
     ) {
     }
 
@@ -37,17 +40,26 @@ final readonly class GeneratePayrollReportCommand
      */
     public function generate(): Identifier
     {
-        $employees = $this->getAllEmployees->getAll();
+        /**
+         * @throws CannotCalculateBonusDetailsException
+         * @throws InvalidYearsOfSeniorityException
+         * @throws IncompatibleMoneyException
+         * @throws CannotGetDepartmentException
+         * @throws InvalidDateTimeException
+         */
+        return $this->transaction->start(function (): Identifier {
+            $employees = $this->getAllEmployees->getAll();
 
-        $payrollReport = PayrollReport::generate(
-            $this->identifierGenerator,
-            $employees,
-            $this->getBonusDetails,
-            $this->getDepartment
-        );
+            $payrollReport = PayrollReport::generate(
+                $this->identifierGenerator,
+                $employees,
+                $this->getBonusDetails,
+                $this->getDepartment
+            );
 
-        $this->aggregateEventDispatcher->dispatch($payrollReport);
+            $this->aggregateEventDispatcher->dispatch($payrollReport);
 
-        return $payrollReport->getId();
+            return $payrollReport->getId();
+        });
     }
 }
