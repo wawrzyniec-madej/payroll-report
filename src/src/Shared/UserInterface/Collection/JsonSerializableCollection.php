@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\UserInterface\Collection;
 
-use App\Shared\Domain\TypedCollection;
+use App\Shared\Domain\Collection\TypedCollection;
 use JsonSerializable;
 
 /** @extends TypedCollection<JsonSerializable> */

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Employee\Domain\Collection;
 
 use App\Module\Employee\Domain\Entity\Employee;
-use App\Shared\Domain\TypedCollection;
+use App\Shared\Domain\Collection\TypedCollection;
 
 /** @extends TypedCollection<Employee> */
 final class EmployeeCollection extends TypedCollection

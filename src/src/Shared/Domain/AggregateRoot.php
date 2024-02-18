@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain;
 
+use App\Shared\Domain\Collection\DomainEventCollection;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Interface\DomainEventInterface;
 

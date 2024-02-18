@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Exception;
+namespace App\Module\Bonus\Domain\Exception;
+
+use App\Shared\Domain\Exception\DomainException;
 
 final class InvalidPercentageException extends DomainException
 {

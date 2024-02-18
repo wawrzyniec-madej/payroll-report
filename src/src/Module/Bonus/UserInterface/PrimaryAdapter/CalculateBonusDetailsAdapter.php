@@ -6,11 +6,11 @@ namespace App\Module\Bonus\UserInterface\PrimaryAdapter;
 
 use App\Module\Bonus\Application\Query\CalculateBonusDetailsQuery;
 use App\Module\Bonus\Domain\Exception\BonusNotFoundException;
+use App\Module\Bonus\Domain\Exception\InvalidPercentageException;
 use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
-use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 

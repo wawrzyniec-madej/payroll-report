@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Application\FilterAndSort\Collection;
 
 use App\Shared\Application\FilterAndSort\SortName;
-use App\Shared\Domain\TypedCollection;
+use App\Shared\Domain\Collection\TypedCollection;
 
 /** @extends TypedCollection<SortName> */
 final class SortNameCollection extends TypedCollection

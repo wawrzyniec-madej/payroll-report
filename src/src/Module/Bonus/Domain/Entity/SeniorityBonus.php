@@ -38,6 +38,9 @@ final class SeniorityBonus extends Bonus
             ? $this->employmentThreshold->getValue()
             : $employeeSeniority->getValue();
 
-        return $this->yearlyBonus->multiply($limitedSeniority);
+        return new Money(
+            $this->yearlyBonus->getAmount() * $limitedSeniority,
+            $this->yearlyBonus->getCurrency()
+        );
     }
 }

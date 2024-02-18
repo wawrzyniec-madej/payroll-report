@@ -6,10 +6,10 @@ namespace App\Module\Bonus\Domain\Entity;
 
 use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
+use App\Module\Bonus\Domain\ValueObject\Percentage;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use App\Shared\Domain\ValueObject\Percentage;
 
 final class PercentageBonus extends Bonus
 {
@@ -27,7 +27,10 @@ final class PercentageBonus extends Bonus
     {
         return new BonusDetails(
             $this->getName(),
-            $remunerationBase->multiplyByPercentage($this->percentage)
+            new Money(
+                (int) floor($remunerationBase->getAmount() * $this->percentage->getFloat()),
+                $remunerationBase->getCurrency()
+            )
         );
     }
 }

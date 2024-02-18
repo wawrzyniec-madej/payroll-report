@@ -1,7 +1,7 @@
 deptrac:
   skip_violations:
     App\Module\PayrollReport\Infrastructure\SecondaryAdapter\CalculateBonusDetailsAdapter:
-      - App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployeeAdapter
+      - App\Module\Bonus\UserInterface\PrimaryAdapter\CalculateBonusDetailsAdapter
     App\Module\PayrollReport\Infrastructure\SecondaryAdapter\GetDepartmentAdapter:
       - App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentAdapter
     App\Module\PayrollReport\Infrastructure\SecondaryAdapter\GetEmployeesAdapter:

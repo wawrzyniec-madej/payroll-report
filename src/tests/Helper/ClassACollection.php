@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Helper;
 
-use App\Shared\Domain\TypedCollection;
+use App\Shared\Domain\Collection\TypedCollection;
 
 /** @extends TypedCollection<ClassA> */
 final class ClassACollection extends TypedCollection

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\ValueObject;
+namespace App\Module\Bonus\Domain\ValueObject;
 
-use App\Shared\Domain\Exception\InvalidPercentageException;
+use App\Module\Bonus\Domain\Exception\InvalidPercentageException;
 
 final readonly class Percentage
 {
