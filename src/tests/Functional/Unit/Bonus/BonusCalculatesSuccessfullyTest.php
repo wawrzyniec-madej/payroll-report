@@ -15,6 +15,7 @@ use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Percentage;
 use App\Tests\Helper\IdentifierHelper;
+use Generator;
 use PHPUnit\Framework\TestCase;
 
 final class BonusCalculatesSuccessfullyTest extends TestCase
@@ -38,7 +39,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         );
     }
 
-    private function successfulDataProvider(): \Generator
+    private function successfulDataProvider(): Generator
     {
         $tenPercentBonus = new PercentageBonus(
             IdentifierHelper::generateUlid(),

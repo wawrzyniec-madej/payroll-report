@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Acceptance;
 
 use App\Tests\Helper\ApiTestCase;
+use Generator;
 
 final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
 {
@@ -39,7 +40,7 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
         );
     }
 
-    public function sortingDataProvider(): \Generator
+    public function sortingDataProvider(): Generator
     {
         yield [
             'name=adam',

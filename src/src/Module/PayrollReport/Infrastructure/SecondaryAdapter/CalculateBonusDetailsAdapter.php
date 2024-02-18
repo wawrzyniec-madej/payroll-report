@@ -13,6 +13,7 @@ use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
+use Exception;
 
 final readonly class CalculateBonusDetailsAdapter implements CalculateBonusDetailsInterface
 {
@@ -35,7 +36,7 @@ final readonly class CalculateBonusDetailsAdapter implements CalculateBonusDetai
                 $yearsOfSeniority->getValue(),
                 $bonusId->getValue()
             );
-        } catch (\Exception) {
+        } catch (Exception) {
             throw CannotCalculateBonusDetailsException::create($bonusId);
         }
 

@@ -22,7 +22,7 @@ final readonly class CalculateBonusDetailsAdapter
     }
 
     /**
-     * @param array{amount: int, currency: string} $baseSalary
+     * @param array{amount: int, currency: string} $remunerationBase
      *
      * @return array{name: string, bonus: array{amount: int, currency: string}}
      *
@@ -31,10 +31,10 @@ final readonly class CalculateBonusDetailsAdapter
      * @throws UnsupportedBonusTypeException
      * @throws InvalidPercentageException
      */
-    public function get(array $baseSalary, int $yearsOfSeniority, string $bonusId): array
+    public function get(array $remunerationBase, int $yearsOfSeniority, string $bonusId): array
     {
         $bonusDetails = $this->getBonusDetailsForEmployeeQuery->calculate(
-            new Money($baseSalary['amount'], CurrencyEnum::from($baseSalary['currency'])),
+            new Money($remunerationBase['amount'], CurrencyEnum::from($remunerationBase['currency'])),
             new YearsOfSeniority($yearsOfSeniority),
             new Identifier($bonusId),
         );

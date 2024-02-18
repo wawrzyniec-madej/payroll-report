@@ -12,6 +12,7 @@ return (new PhpCsFixer\Config())
         '@Symfony' => true,
         'declare_strict_types' => true,
         'final_class' => true,
+        'global_namespace_import' => true,
     ])
     ->setFinder($finder)
 ;
