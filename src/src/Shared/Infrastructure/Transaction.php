@@ -27,6 +27,10 @@ final class Transaction implements TransactionInterface
     public function start(
         Closure $method
     ): mixed {
+        if ($this->isRunning) {
+            $method();
+        }
+
         $this->isRunning = true;
 
         try {
