@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\Entity;
 
-use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
-use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
+use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
+use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
@@ -32,23 +33,30 @@ final readonly class PayrollReportRow
     }
 
     /**
-     * @throws CannotGetBonusDetailsException
+     * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
      */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         Employee $employee,
-        GetBonusDetailsInterface $getBonusDetails
+        CalculateBonusDetailsInterface $getBonusDetails,
+        GetDepartmentInterface $getDepartment
     ): self {
-        $bonusDetails = $getBonusDetails->getForEmployee($employee);
+        $department = $getDepartment->getById($employee->getDepartmentId());
+
+        $bonusDetails = $getBonusDetails->calculate(
+            $employee->getRemunerationBase(),
+            $employee->getYearsOfSeniority(),
+            $department->getBonusId()
+        );
 
         return new self(
             $identifierGenerator->generate(),
             $employee->getName(),
             $employee->getSurname(),
             $employee->getRemunerationBase(),
-            $employee->getDepartment()->getName(),
+            $department->getName(),
             $bonusDetails->getName(),
             $bonusDetails->getAdditionToBase(),
             $bonusDetails->getSalaryWithBonus(),

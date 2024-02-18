@@ -8,11 +8,23 @@ use App\Shared\Domain\Money;
 
 final readonly class BonusDetails
 {
-    public function __construct(
+    private function __construct(
         private BonusName $name,
         private Money $additionToBase,
         private Money $salaryWithBonus
     ) {
+    }
+
+    public static function create(
+        BonusName $bonusName,
+        Money $additionToBase,
+        Money $remunerationBase
+    ): self {
+        return new self(
+            $bonusName,
+            $additionToBase,
+            $remunerationBase->add($additionToBase)
+        );
     }
 
     public function getSalaryWithBonus(): Money

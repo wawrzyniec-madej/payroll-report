@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\UserInterface\Controller;
 
 use App\Module\PayrollReport\Application\Command\GeneratePayrollReportCommand;
-use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
@@ -28,7 +28,7 @@ final readonly class GeneratePayrollReportController
 
     /**
      * @throws CollectionElementInvalidException
-     * @throws CannotGetBonusDetailsException
+     * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
      * @throws CannotGetDepartmentException

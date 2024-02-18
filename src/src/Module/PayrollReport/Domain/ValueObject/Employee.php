@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
 use App\Shared\Domain\Money;
+use App\Shared\Domain\ValueObject\Identifier;
 
 final readonly class Employee
 {
@@ -12,7 +13,7 @@ final readonly class Employee
         private EmployeeName $name,
         private EmployeeSurname $surname,
         private Money $remunerationBase,
-        private Department $department,
+        private Identifier $departmentId,
         private YearsOfSeniority $yearsOfSeniority
     ) {
     }
@@ -32,9 +33,9 @@ final readonly class Employee
         return $this->remunerationBase;
     }
 
-    public function getDepartment(): Department
+    public function getDepartmentId(): Identifier
     {
-        return $this->department;
+        return $this->departmentId;
     }
 
     public function getYearsOfSeniority(): YearsOfSeniority

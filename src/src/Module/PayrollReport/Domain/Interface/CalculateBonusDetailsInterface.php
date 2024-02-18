@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\Interface;
 
-use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
+use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
+use App\Shared\Domain\Money;
+use App\Shared\Domain\ValueObject\Identifier;
 
-interface GetBonusDetailsInterface
+interface CalculateBonusDetailsInterface
 {
     /**
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
-     * @throws CannotGetBonusDetailsException
+     * @throws CannotCalculateBonusDetailsException
      */
-    public function getForEmployee(Employee $employee): BonusDetails;
+    public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority, Identifier $bonusId): BonusDetails;
 }

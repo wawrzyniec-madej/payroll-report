@@ -7,9 +7,10 @@ namespace App\Module\PayrollReport\Domain\Entity;
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
-use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
+use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
+use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
@@ -28,14 +29,15 @@ final class PayrollReport extends AggregateRoot
 
     /**
      * @throws CollectionElementInvalidException
-     * @throws CannotGetBonusDetailsException
+     * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
      */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,
         EmployeeCollection $employees,
-        GetBonusDetailsInterface $getBonusDetails
+        CalculateBonusDetailsInterface $getBonusDetails,
+        GetDepartmentInterface $getDepartment
     ): self {
         $payrollReport = new self(
             $identifierGenerator->generate(),
@@ -48,7 +50,8 @@ final class PayrollReport extends AggregateRoot
                 PayrollReportRow::generate(
                     $identifierGenerator,
                     $employee,
-                    $getBonusDetails
+                    $getBonusDetails,
+                    $getDepartment
                 )
             );
         }
