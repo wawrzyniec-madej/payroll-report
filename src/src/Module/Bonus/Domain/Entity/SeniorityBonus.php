@@ -6,7 +6,6 @@ namespace App\Module\Bonus\Domain\Entity;
 
 use App\Module\Bonus\Domain\Enum\BonusTypeEnum;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
-use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
@@ -24,15 +23,11 @@ final class SeniorityBonus extends Bonus
         );
     }
 
-    public function calculateForEmployee(Employee $employee): BonusDetails
+    public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority): BonusDetails
     {
-        $bonus = $this->calculateYearlyBonusFromSeniority(
-            $employee->getYearsOfSeniority()
-        );
-
         return new BonusDetails(
             $this->getName(),
-            $bonus
+            $this->calculateYearlyBonusFromSeniority($yearsOfSeniority)
         );
     }
 

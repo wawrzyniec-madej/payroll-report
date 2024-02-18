@@ -8,7 +8,6 @@ use App\Module\PayrollReport\Application\Collection\PayrollReportRowDTOCollectio
 use App\Module\PayrollReport\Application\Interface\SearchPayrollReportRowsInterface;
 use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
 use App\Shared\Application\FilterAndSort\Sort;
-use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\ValueObject\Identifier;
 
 final readonly class SearchPayrollReportRowsQuery

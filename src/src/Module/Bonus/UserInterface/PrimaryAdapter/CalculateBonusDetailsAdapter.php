@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Module\Bonus\UserInterface\PrimaryAdapter;
 
-use App\Module\Bonus\Application\Query\GetBonusDetailsForEmployeeQuery;
+use App\Module\Bonus\Application\Query\CalculateBonusDetailsQuery;
 use App\Module\Bonus\Domain\Exception\BonusNotFoundException;
 use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
-use App\Module\Bonus\Domain\ValueObject\Employee;
 use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final readonly class GetBonusDetailsForEmployeeAdapter
+final readonly class CalculateBonusDetailsAdapter
 {
     public function __construct(
-        private GetBonusDetailsForEmployeeQuery $getBonusDetailsForEmployeeQuery
+        private CalculateBonusDetailsQuery $getBonusDetailsForEmployeeQuery
     ) {
     }
 
@@ -34,11 +33,9 @@ final readonly class GetBonusDetailsForEmployeeAdapter
      */
     public function get(array $baseSalary, int $yearsOfSeniority, string $bonusId): array
     {
-        $bonusDetails = $this->getBonusDetailsForEmployeeQuery->get(
-            new Employee(
-                new Money($baseSalary['amount'], CurrencyEnum::from($baseSalary['currency'])),
-                new YearsOfSeniority($yearsOfSeniority)
-            ),
+        $bonusDetails = $this->getBonusDetailsForEmployeeQuery->calculate(
+            new Money($baseSalary['amount'], CurrencyEnum::from($baseSalary['currency'])),
+            new YearsOfSeniority($yearsOfSeniority),
             new Identifier($bonusId),
         );
 

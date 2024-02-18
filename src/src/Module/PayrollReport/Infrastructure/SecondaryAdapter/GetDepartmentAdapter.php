@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
 use App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentAdapter as GetDepartmentPrimary;
@@ -8,7 +10,6 @@ use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Module\PayrollReport\Domain\ValueObject\Department;
 use App\Module\PayrollReport\Domain\ValueObject\DepartmentName;
 use App\Shared\Domain\ValueObject\Identifier;
-use Exception;
 
 final readonly class GetDepartmentAdapter implements GetDepartmentInterface
 {
@@ -21,7 +22,7 @@ final readonly class GetDepartmentAdapter implements GetDepartmentInterface
     {
         try {
             $result = $this->getDepartmentByIdAdapter->get($departmentId->getValue());
-        } catch (Exception) {
+        } catch (\Exception) {
             throw CannotGetDepartmentException::create($departmentId);
         }
 

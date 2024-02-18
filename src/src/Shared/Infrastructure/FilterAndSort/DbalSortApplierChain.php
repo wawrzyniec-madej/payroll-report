@@ -15,8 +15,9 @@ final class DbalSortApplierChain
     private DbalSortApplierCollection $sortAppliers;
 
     /**
-     * @throws CollectionElementInvalidException
      * @param iterable<DbalFilterApplierInterface> $dbalSortAppliers
+     *
+     * @throws CollectionElementInvalidException
      */
     public function __construct(
         #[TaggedIterator(tag: 'app.dbal_sort_applier')]

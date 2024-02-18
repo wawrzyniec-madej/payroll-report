@@ -16,6 +16,7 @@ final class DbalFilterApplierChain
 
     /**
      * @param iterable<DbalFilterApplierInterface> $dbalFilterAppliers
+     *
      * @throws CollectionElementInvalidException
      */
     public function __construct(

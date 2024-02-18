@@ -9,11 +9,12 @@ use App\Module\Bonus\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\Bonus\Domain\Exception\UnsupportedBonusTypeException;
 use App\Module\Bonus\Domain\Interface\BonusRepositoryInterface;
 use App\Module\Bonus\Domain\ValueObject\BonusDetails;
-use App\Module\Bonus\Domain\ValueObject\Employee;
+use App\Module\Bonus\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Exception\InvalidPercentageException;
+use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final readonly class GetBonusDetailsForEmployeeQuery
+final readonly class CalculateBonusDetailsQuery
 {
     public function __construct(
         private BonusRepositoryInterface $bonusRepository
@@ -26,10 +27,10 @@ final readonly class GetBonusDetailsForEmployeeQuery
      * @throws UnsupportedBonusTypeException
      * @throws InvalidPercentageException
      */
-    public function get(Employee $employee, Identifier $bonusId): BonusDetails
+    public function calculate(Money $remunerationBase, YearsOfSeniority $yearsOfSeniority, Identifier $bonusId): BonusDetails
     {
         $bonus = $this->bonusRepository->getOneById($bonusId);
 
-        return $bonus->calculateForEmployee($employee);
+        return $bonus->calculate($remunerationBase, $yearsOfSeniority);
     }
 }

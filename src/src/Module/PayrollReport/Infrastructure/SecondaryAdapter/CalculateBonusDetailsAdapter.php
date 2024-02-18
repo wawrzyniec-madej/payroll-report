@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
-use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployeeAdapter;
+use App\Module\Bonus\UserInterface\PrimaryAdapter\CalculateBonusDetailsAdapter as CalculateBonusDetailsPrimary;
 use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
@@ -13,12 +13,11 @@ use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
-use Exception;
 
 final readonly class CalculateBonusDetailsAdapter implements CalculateBonusDetailsInterface
 {
     public function __construct(
-        private GetBonusDetailsForEmployeeAdapter $getBonusDetailsForEmployee
+        private CalculateBonusDetailsPrimary $getBonusDetailsForEmployee
     ) {
     }
 
@@ -36,7 +35,7 @@ final readonly class CalculateBonusDetailsAdapter implements CalculateBonusDetai
                 $yearsOfSeniority->getValue(),
                 $bonusId->getValue()
             );
-        } catch (Exception) {
+        } catch (\Exception) {
             throw CannotCalculateBonusDetailsException::create($bonusId);
         }
 

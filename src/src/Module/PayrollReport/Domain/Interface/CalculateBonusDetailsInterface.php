@@ -7,7 +7,6 @@ namespace App\Module\PayrollReport\Domain\Interface;
 use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
-use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Module\PayrollReport\Domain\ValueObject\YearsOfSeniority;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Money;

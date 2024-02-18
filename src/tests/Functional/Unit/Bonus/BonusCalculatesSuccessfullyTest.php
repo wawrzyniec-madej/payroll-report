@@ -25,7 +25,7 @@ final class BonusCalculatesSuccessfullyTest extends TestCase
         Employee $employee,
         BonusDetails $expectedDetails
     ): void {
-        $details = $bonus->calculateForEmployee($employee);
+        $details = $bonus->calculate($employee);
 
         self::assertEquals(
             $expectedDetails->getBonus()->getAmount(),
