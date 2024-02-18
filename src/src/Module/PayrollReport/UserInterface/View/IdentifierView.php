@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\UserInterface\View;
+namespace App\Module\PayrollReport\UserInterface\View;
 
 use App\Shared\Domain\ValueObject\Identifier;
 use JsonSerializable;

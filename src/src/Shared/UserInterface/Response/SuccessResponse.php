@@ -7,10 +7,10 @@ namespace App\Shared\UserInterface\Response;
 use JsonSerializable;
 use Symfony\Component\HttpFoundation\JsonResponse as BaseJsonResponse;
 
-final class JsonResponse extends BaseJsonResponse
+final class SuccessResponse extends BaseJsonResponse
 {
-    public function __construct(JsonSerializable $data, int $status = 200)
+    public function __construct(JsonSerializable $data)
     {
-        parent::__construct($data, $status);
+        parent::__construct($data);
     }
 }

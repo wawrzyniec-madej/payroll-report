@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App\Shared\UserInterface\ValueResolver;
 
-use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\UserInterface\Exception\InvalidSortException;
 use App\Shared\UserInterface\Factory\FilterFactory;
 use App\Shared\UserInterface\Factory\SortFactory;
-use App\Shared\UserInterface\Interface\FilterableRequestInterface;
 use App\Shared\UserInterface\Interface\RequestInterface;
-use App\Shared\UserInterface\Interface\SortableRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -28,9 +25,6 @@ final class RequestValueResolver implements ValueResolverInterface
 
     /**
      * @return iterable<RequestInterface>
-     *
-     * @throws CollectionElementInvalidException
-     * @throws InvalidSortException
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
@@ -44,19 +38,11 @@ final class RequestValueResolver implements ValueResolverInterface
             return [];
         }
 
-        $filters = is_subclass_of($argumentType, FilterableRequestInterface::class)
-            ? $this->filterFactory->create($argumentType::getAllowedFilterNames(), $request->query->all())
-            : FilterCollection::createEmpty();
-
-        $sort = is_subclass_of($argumentType, SortableRequestInterface::class)
-            ? $this->sortFactory->create($argumentType::getAllowedSortNames(), $request->query->all())
-            : null;
-
         return [
             $argumentType::create(
                 $request,
-                $filters,
-                $sort
+                $this->filterFactory,
+                $this->sortFactory
             ),
         ];
     }

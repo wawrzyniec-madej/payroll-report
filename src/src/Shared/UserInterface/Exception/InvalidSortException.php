@@ -9,7 +9,7 @@ final class InvalidSortException extends UserInterfaceException
     public static function create(string $value, string $name): self
     {
         return new self(
-            sprintf('Sort value [%s] for [%s] is invalid.', $value, $name)
+            sprintf('Sort [%s] with value [%s] is invalid.', $name, $value)
         );
     }
 }

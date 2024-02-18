@@ -11,7 +11,7 @@ use App\Shared\Domain\Exception\CollectionElementInvalidException;
 interface FilterableRequestInterface
 {
     /** @throws CollectionElementInvalidException */
-    public static function getAllowedFilterNames(): FilterNameCollection;
+    public function getAllowedFilterNames(): FilterNameCollection;
 
     public function getFilters(): FilterCollection;
 }

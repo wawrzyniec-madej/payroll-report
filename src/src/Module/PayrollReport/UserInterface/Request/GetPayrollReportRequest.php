@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\UserInterface\Request;
 
-use App\Shared\Application\FilterAndSort\Collection\FilterCollection;
 use App\Shared\Application\FilterAndSort\Collection\FilterNameCollection;
 use App\Shared\Application\FilterAndSort\Collection\SortNameCollection;
 use App\Shared\Application\FilterAndSort\FilterName;
-use App\Shared\Application\FilterAndSort\Sort;
 use App\Shared\Application\FilterAndSort\SortName;
 use App\Shared\Domain\ValueObject\Identifier;
 use App\Shared\UserInterface\Interface\FilterableRequestInterface;
@@ -22,7 +20,7 @@ final readonly class GetPayrollReportRequest extends AbstractRequest implements 
         return new Identifier($this->request->attributes->getString('id'));
     }
 
-    public static function getAllowedFilterNames(): FilterNameCollection
+    public function getAllowedFilterNames(): FilterNameCollection
     {
         return FilterNameCollection::createFromSpread(
             new FilterName('department'),
@@ -31,7 +29,7 @@ final readonly class GetPayrollReportRequest extends AbstractRequest implements 
         );
     }
 
-    public static function getAllowedSortNames(): SortNameCollection
+    public function getAllowedSortNames(): SortNameCollection
     {
         return SortNameCollection::createFromSpread(
             new SortName('name'),
@@ -42,15 +40,5 @@ final readonly class GetPayrollReportRequest extends AbstractRequest implements 
             new SortName('bonusType'),
             new SortName('salaryWithBonus'),
         );
-    }
-
-    public function getFilters(): FilterCollection
-    {
-        return $this->filters;
-    }
-
-    public function getSort(): ?Sort
-    {
-        return $this->sort;
     }
 }

@@ -9,7 +9,9 @@ use App\Module\PayrollReport\UserInterface\Request\GetPayrollReportRequest;
 use App\Module\PayrollReport\UserInterface\View\PayrollReportRowView;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\UserInterface\Collection\JsonSerializableCollection;
-use App\Shared\UserInterface\Response\JsonResponse;
+use App\Shared\UserInterface\Exception\InvalidSortException;
+use App\Shared\UserInterface\Response\BadRequestResponse;
+use App\Shared\UserInterface\Response\SuccessResponse;
 use App\Shared\UserInterface\View\ResultView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +32,15 @@ final readonly class SearchPayrollReportRowsController
     #[Route(path: '/payroll-report/{id}/rows', methods: [Request::METHOD_GET])]
     public function __invoke(GetPayrollReportRequest $request): Response
     {
-        $payrollReportRowDTOs = $this->searchPayrollReportRowsQuery->search(
-            $request->getId(),
-            $request->getFilters(),
-            $request->getSort()
-        );
+        try {
+            $payrollReportRowDTOs = $this->searchPayrollReportRowsQuery->search(
+                $request->getId(),
+                $request->getFilters(),
+                $request->getSort()
+            );
+        } catch (InvalidSortException $exception) {
+            return new BadRequestResponse($exception->getMessage());
+        }
 
         $payrollReportRowViews = JsonSerializableCollection::createEmpty();
         foreach ($payrollReportRowDTOs as $payrollReportRowDTO) {
@@ -43,7 +49,7 @@ final readonly class SearchPayrollReportRowsController
             );
         }
 
-        return new JsonResponse(
+        return new SuccessResponse(
             new ResultView($payrollReportRowViews)
         );
     }
