@@ -3,9 +3,8 @@
 namespace App\Module\PayrollReport\UserInterface\View;
 
 use App\Module\PayrollReport\Application\DTO\PayrollReportRowDTO;
-use JsonSerializable;
 
-final readonly class PayrollReportRowView implements JsonSerializable
+final readonly class PayrollReportRowView implements \JsonSerializable
 {
     public function __construct(
         private PayrollReportRowDTO $payrollReportRowDTO

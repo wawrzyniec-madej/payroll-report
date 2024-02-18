@@ -3,14 +3,13 @@
 namespace App\Tests\Functional\Acceptance;
 
 use App\Tests\Helper\ApiTestCase;
-use Generator;
 
 final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
 {
     private static string $generatedReportId;
 
     /** @dataProvider sortingDataProvider */
-    public function test_sorting_works(string $query, array $expectedResults): void
+    public function testSortingWorks(string $query, array $expectedResults): void
     {
         if (!isset(self::$generatedReportId)) {
             $this->client->request(
@@ -32,13 +31,13 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
 
         $this->assertEquals(
             [
-                'result' => $expectedResults
+                'result' => $expectedResults,
             ],
             $this->getJsonResponseData()
         );
     }
 
-    public function sortingDataProvider(): Generator
+    public function sortingDataProvider(): \Generator
     {
         yield [
             'name=adam',
@@ -50,9 +49,9 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
                     'bonusType' => 'seniority',
                     'remunerationBase' => 100000,
                     'additionToBase' => 100000,
-                    'salaryWithBonus' => 200000
-                ]
-            ]
+                    'salaryWithBonus' => 200000,
+                ],
+            ],
         ];
 
         yield [
@@ -65,9 +64,9 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
                     'bonusType' => 'percentage',
                     'remunerationBase' => 110000,
                     'additionToBase' => 11000,
-                    'salaryWithBonus' => 121000
-                ]
-            ]
+                    'salaryWithBonus' => 121000,
+                ],
+            ],
         ];
 
         yield [
@@ -80,9 +79,9 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
                     'bonusType' => 'seniority',
                     'remunerationBase' => 100000,
                     'additionToBase' => 100000,
-                    'salaryWithBonus' => 200000
-                ]
-            ]
+                    'salaryWithBonus' => 200000,
+                ],
+            ],
         ];
 
         yield [
@@ -95,7 +94,7 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
                     'bonusType' => 'percentage',
                     'remunerationBase' => 110000,
                     'additionToBase' => 11000,
-                    'salaryWithBonus' => 121000
+                    'salaryWithBonus' => 121000,
                 ],
                 [
                     'name' => 'Monika',
@@ -104,9 +103,9 @@ final class SearchPayrollReportRowsAllowsFilteringTest extends ApiTestCase
                     'bonusType' => 'percentage',
                     'remunerationBase' => 50000,
                     'additionToBase' => 5000,
-                    'salaryWithBonus' => 55000
-                ]
-            ]
+                    'salaryWithBonus' => 55000,
+                ],
+            ],
         ];
     }
 }

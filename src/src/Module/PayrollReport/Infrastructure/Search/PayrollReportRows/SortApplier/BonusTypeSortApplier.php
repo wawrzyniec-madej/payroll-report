@@ -15,6 +15,6 @@ final class BonusTypeSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'bonusType';
+        return 'bonusType' === $sort->getName()->getValue();
     }
 }

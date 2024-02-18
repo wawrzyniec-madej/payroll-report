@@ -15,6 +15,6 @@ final class SalaryWithBonusSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'salaryWithBonus';
+        return 'salaryWithBonus' === $sort->getName()->getValue();
     }
 }

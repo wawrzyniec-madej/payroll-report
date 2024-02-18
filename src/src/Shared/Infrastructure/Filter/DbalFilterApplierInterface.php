@@ -4,7 +4,6 @@ namespace App\Shared\Infrastructure\Filter;
 
 use App\Shared\Application\FilterAndSort\Filter;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 interface DbalFilterApplierInterface
 {

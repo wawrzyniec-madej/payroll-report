@@ -22,7 +22,9 @@ final readonly class GetBonusDetailsForEmployeeAdapter
 
     /**
      * @param array{amount: int, currency: string} $baseSalary
+     *
      * @return array{name: string, bonus: array{amount: int, currency: string}}
+     *
      * @throws BonusNotFoundException
      * @throws InvalidYearsOfSeniorityException
      * @throws UnsupportedBonusTypeException

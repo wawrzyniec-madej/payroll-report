@@ -15,6 +15,6 @@ final class AdditionToBaseSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'additionToBase';
+        return 'additionToBase' === $sort->getName()->getValue();
     }
 }

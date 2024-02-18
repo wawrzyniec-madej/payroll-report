@@ -15,6 +15,6 @@ final class RemunerationBaseSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'remunerationBase';
+        return 'remunerationBase' === $sort->getName()->getValue();
     }
 }

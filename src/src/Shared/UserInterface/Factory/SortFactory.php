@@ -14,6 +14,7 @@ final class SortFactory
 
     /**
      * @param array<string, string|array<string, string>> $providedParams
+     *
      * @throws InvalidSortException
      */
     public function create(SortNameCollection $allowedSortNames, array $providedParams): ?Sort
@@ -28,7 +29,7 @@ final class SortFactory
             return null;
         }
 
-        if (count($parameter) !== 1) {
+        if (1 !== count($parameter)) {
             return null;
         }
 
@@ -40,10 +41,7 @@ final class SortFactory
 
         $parameterValue = $parameter[$providedSortName->getValue()];
 
-        $direction = SortDirectionEnum::tryFrom($parameterValue) ?? throw InvalidSortException::create(
-            $parameterValue,
-            $providedSortName->getValue()
-        );
+        $direction = SortDirectionEnum::tryFrom($parameterValue) ?? throw InvalidSortException::create($parameterValue, $providedSortName->getValue());
 
         return new Sort(
             $providedSortName,

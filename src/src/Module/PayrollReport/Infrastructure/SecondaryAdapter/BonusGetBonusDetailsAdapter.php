@@ -10,7 +10,6 @@ use App\Module\PayrollReport\Domain\ValueObject\BonusName;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
-use Exception;
 
 final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInterface
 {
@@ -32,7 +31,7 @@ final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInter
                 $employee->getYearsOfSeniority()->getValue(),
                 $bonusId->getValue()
             );
-        } catch (Exception) {
+        } catch (\Exception) {
             throw CannotGetBonusDetailsException::create($bonusId);
         }
 

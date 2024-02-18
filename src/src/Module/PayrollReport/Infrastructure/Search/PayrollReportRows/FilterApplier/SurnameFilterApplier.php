@@ -17,6 +17,6 @@ final class SurnameFilterApplier implements DbalFilterApplierInterface
 
     public function supports(Filter $filter): bool
     {
-        return $filter->getName() === 'surname';
+        return 'surname' === $filter->getName();
     }
 }

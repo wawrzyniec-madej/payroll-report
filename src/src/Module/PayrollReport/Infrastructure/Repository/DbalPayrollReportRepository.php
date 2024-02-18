@@ -6,7 +6,6 @@ use App\Module\PayrollReport\Domain\Entity\PayrollReport;
 use App\Module\PayrollReport\Domain\Interface\PayrollReportRepositoryInterface;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
-use Throwable;
 
 final readonly class DbalPayrollReportRepository implements PayrollReportRepositoryInterface
 {
@@ -34,7 +33,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                     ])
                     ->executeStatement();
 
-                /** @todo refactor to multiple values at once */
+                /* @todo refactor to multiple values at once */
                 foreach ($payrollReport->getRows() as $payrollReportRow) {
                     $builder
                         ->insert('payroll_report_row')
@@ -72,7 +71,7 @@ final readonly class DbalPayrollReportRepository implements PayrollReportReposit
                         ->executeStatement();
                 }
             });
-        } catch (Throwable $throwable) {
+        } catch (\Throwable $throwable) {
             throw DatabaseException::fromPrevious($throwable);
         }
     }

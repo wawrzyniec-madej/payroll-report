@@ -17,6 +17,6 @@ final class DepartmentFilterApplier implements DbalFilterApplierInterface
 
     public function supports(Filter $filter): bool
     {
-        return $filter->getName() === 'department';
+        return 'department' === $filter->getName();
     }
 }

@@ -15,6 +15,6 @@ final class SurnameSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'surname';
+        return 'surname' === $sort->getName()->getValue();
     }
 }

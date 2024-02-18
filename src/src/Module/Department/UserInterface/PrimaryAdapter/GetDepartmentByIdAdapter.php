@@ -15,6 +15,7 @@ final readonly class GetDepartmentByIdAdapter
 
     /**
      * @return array{name: string, bonusId: string}
+     *
      * @throws DepartmentNotFoundException
      */
     public function get(string $id): array

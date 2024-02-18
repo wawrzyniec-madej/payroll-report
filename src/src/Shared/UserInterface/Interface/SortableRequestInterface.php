@@ -9,7 +9,6 @@ use App\Shared\Domain\Exception\CollectionElementInvalidException;
 interface SortableRequestInterface
 {
     /** @throws CollectionElementInvalidException */
-
     public static function getAllowedSortNames(): SortNameCollection;
 
     public function getSort(): ?Sort;

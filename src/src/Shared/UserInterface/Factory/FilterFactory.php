@@ -11,6 +11,7 @@ final class FilterFactory
 {
     /**
      * @param array<string, string|array<string, string>> $providedParams
+     *
      * @throws CollectionElementInvalidException
      */
     public function create(FilterNameCollection $allowedFilterNames, array $providedParams): FilterCollection

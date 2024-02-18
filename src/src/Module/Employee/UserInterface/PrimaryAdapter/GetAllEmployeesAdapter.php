@@ -15,6 +15,7 @@ final readonly class GetAllEmployeesAdapter
 
     /**
      * @return list<array{id: string, name: string, surname: string, dateOfEmployment: string, departmentId: string, baseSalaryAmount: int, baseSalaryCurrency: string}>
+     *
      * @throws CollectionElementInvalidException
      * @throws InvalidDateTimeException
      */

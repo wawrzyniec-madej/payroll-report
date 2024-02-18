@@ -8,7 +8,6 @@ use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
-use App\Module\PayrollReport\Domain\Interface\PayrollReportRepositoryInterface;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;

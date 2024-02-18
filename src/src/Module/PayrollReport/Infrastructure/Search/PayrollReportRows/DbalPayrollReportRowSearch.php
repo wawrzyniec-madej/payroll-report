@@ -23,7 +23,6 @@ use App\Shared\Infrastructure\Collection\DbalFilterApplierCollection;
 use App\Shared\Infrastructure\Collection\DbalSortApplierCollection;
 use App\Shared\Infrastructure\Exception\DatabaseException;
 use Doctrine\DBAL\Connection;
-use Exception;
 
 final readonly class DbalPayrollReportRowSearch implements SearchPayrollReportRowsInterface
 {
@@ -81,7 +80,7 @@ final readonly class DbalPayrollReportRowSearch implements SearchPayrollReportRo
         try {
             /** @var list<array{department:string, name:string, surname:string, remuneration_base_amount:int, addition_to_base_amount:int, bonus_type:string, salary_with_bonus_amount:int}> $results */
             $results = $builder->fetchAllAssociative();
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw DatabaseException::fromPrevious($exception);
         }
 

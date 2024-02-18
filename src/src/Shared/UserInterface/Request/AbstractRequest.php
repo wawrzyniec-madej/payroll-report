@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract readonly class AbstractRequest implements RequestInterface
 {
-    private final function __construct(
+    final private function __construct(
         protected Request $request,
         protected FilterCollection $filters,
         protected ?Sort $sort

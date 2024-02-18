@@ -34,7 +34,7 @@ deptrac:
 
 .PHONY: cs-fix
 cs-fix:
-	docker compose exec -it php-fpm vendor/bin/php-cs-fixer fix
+	docker compose exec -it php-fpm vendor/bin/php-cs-fixer fix --config=php-cs-fixer.php
 
 .PHONY: test-acceptance
 test-acceptance:

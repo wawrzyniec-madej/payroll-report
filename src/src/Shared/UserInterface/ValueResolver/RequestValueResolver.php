@@ -25,9 +25,10 @@ final class RequestValueResolver implements ValueResolverInterface
     }
 
     /**
+     * @return iterable<RequestInterface>
+     *
      * @throws CollectionElementInvalidException
      * @throws InvalidSortException
-     * @return iterable<RequestInterface>
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
@@ -36,7 +37,7 @@ final class RequestValueResolver implements ValueResolverInterface
         if (
             !$argumentType
             || !is_subclass_of($argumentType, RequestInterface::class)
-            || $argument->getName() !== self::ALLOWED_NAME
+            || self::ALLOWED_NAME !== $argument->getName()
         ) {
             return [];
         }
@@ -54,7 +55,7 @@ final class RequestValueResolver implements ValueResolverInterface
                 $request,
                 $filters,
                 $sort
-            )
+            ),
         ];
     }
 }

@@ -15,6 +15,6 @@ final class DepartmentSortApplier implements DbalSortApplierInterface
 
     public function supports(Sort $sort): bool
     {
-        return $sort->getName()->getValue() === 'department';
+        return 'department' === $sort->getName()->getValue();
     }
 }
