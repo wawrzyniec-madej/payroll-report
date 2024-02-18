@@ -8,7 +8,6 @@ services:
             - ./src:/var/www
         networks:
             - local_network
-        user: ${USER}
 
     nginx:
         build:
