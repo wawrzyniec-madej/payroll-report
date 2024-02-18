@@ -10,6 +10,9 @@
 1. Execute `make setup`
 
 ## Functionalities:
+
+Default host for local environment is `localhost`
+
 ### Generating new payroll report
 Endpoint: `POST /payroll-report/generate`
 
