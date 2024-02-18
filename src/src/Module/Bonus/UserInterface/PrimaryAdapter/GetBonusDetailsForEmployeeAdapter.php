@@ -13,7 +13,7 @@ use App\Shared\Domain\Exception\InvalidPercentageException;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final readonly class GetBonusDetailsForEmployee
+final readonly class GetBonusDetailsForEmployeeAdapter
 {
     public function __construct(
         private GetBonusDetailsForEmployeeQuery $getBonusDetailsForEmployeeQuery

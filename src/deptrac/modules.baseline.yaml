@@ -2,7 +2,7 @@ deptrac:
   skip_violations:
 #    Allowed communication
     App\Module\PayrollReport\Infrastructure\SecondaryAdapter\BonusGetBonusDetailsAdapter:
-      - App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployee
+      - App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployeeAdapter
     App\Module\PayrollReport\Infrastructure\SecondaryAdapter\EmployeeGetAllEmployeesAdapter:
-      - App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentById
-      - App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployees
+      - App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentByIdAdapter
+      - App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployeesAdapter

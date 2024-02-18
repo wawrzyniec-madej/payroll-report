@@ -2,8 +2,8 @@
 
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
-use App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentById;
-use App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployees as GetAllEmployeesPrimary;
+use App\Module\Department\UserInterface\PrimaryAdapter\GetDepartmentByIdAdapter;
+use App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployeesAdapter as GetAllEmployeesPrimary;
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
@@ -23,7 +23,7 @@ final readonly class EmployeeGetAllEmployeesAdapter implements GetAllEmployeesIn
 {
     public function __construct(
         private GetAllEmployeesPrimary $getAllEmployees,
-        private GetDepartmentById $getDepartmentById
+        private GetDepartmentByIdAdapter $getDepartmentById
     ) {
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
-use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployee;
+use App\Module\Bonus\UserInterface\PrimaryAdapter\GetBonusDetailsForEmployeeAdapter;
 use App\Module\PayrollReport\Domain\Exception\CannotGetBonusDetailsException;
 use App\Module\PayrollReport\Domain\Interface\GetBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\ValueObject\BonusDetails;
@@ -15,7 +15,7 @@ use Exception;
 final readonly class BonusGetBonusDetailsAdapter implements GetBonusDetailsInterface
 {
     public function __construct(
-        private GetBonusDetailsForEmployee $getBonusDetailsForEmployee
+        private GetBonusDetailsForEmployeeAdapter $getBonusDetailsForEmployee
     ) {
     }
 

@@ -6,7 +6,7 @@ use App\Module\Department\Application\Query\GetDepartmentByIdQuery;
 use App\Module\Department\Domain\Exception\DepartmentNotFoundException;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final readonly class GetDepartmentById
+final readonly class GetDepartmentByIdAdapter
 {
     public function __construct(
         private GetDepartmentByIdQuery $getDepartmentByIdQuery
