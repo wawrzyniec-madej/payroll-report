@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\ValueObject;
 
+use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Money;
 
 final readonly class BonusDetails
@@ -15,6 +16,7 @@ final readonly class BonusDetails
     ) {
     }
 
+    /** @throws IncompatibleMoneyException */
     public static function create(
         BonusName $bonusName,
         Money $additionToBase,

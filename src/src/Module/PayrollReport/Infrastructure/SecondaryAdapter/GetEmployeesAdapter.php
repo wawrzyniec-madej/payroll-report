@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Infrastructure\SecondaryAdapter;
 
-use App\Module\Employee\UserInterface\PrimaryAdapter\GetAllEmployeesAdapter as GetAllEmployeesPrimary;
+use App\Module\Employee\UserInterface\PrimaryAdapter\GetEmployeesAdapter as GetEmployeesPrimary;
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\ValueObject\Employee;
@@ -16,10 +16,10 @@ use App\Shared\Domain\Enum\CurrencyEnum;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
-final readonly class GetAllEmployeesAdapter implements GetAllEmployeesInterface
+final readonly class GetEmployeesAdapter implements GetAllEmployeesInterface
 {
     public function __construct(
-        private GetAllEmployeesPrimary $getAllEmployees
+        private GetEmployeesPrimary $getAllEmployees
     ) {
     }
 

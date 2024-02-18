@@ -18,9 +18,6 @@ final readonly class SearchPayrollReportRowsQuery
     ) {
     }
 
-    /**
-     * @throws CollectionElementInvalidException
-     */
     public function search(
         Identifier $payrollReportId,
         FilterCollection $filters,

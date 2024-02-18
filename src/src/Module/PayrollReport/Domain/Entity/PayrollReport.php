@@ -8,6 +8,7 @@ use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
 use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
@@ -32,6 +33,7 @@ final class PayrollReport extends AggregateRoot
      * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
+     * @throws CannotGetDepartmentException
      */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,

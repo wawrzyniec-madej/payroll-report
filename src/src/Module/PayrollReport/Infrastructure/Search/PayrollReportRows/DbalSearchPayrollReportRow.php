@@ -19,7 +19,6 @@ use Exception;
 
 final readonly class DbalSearchPayrollReportRow implements SearchPayrollReportRowsInterface
 {
-    /** @throws CollectionElementInvalidException */
     public function __construct(
         private Connection $connection,
         private DbalFilterApplierChain $dbalFilterApplierChain,

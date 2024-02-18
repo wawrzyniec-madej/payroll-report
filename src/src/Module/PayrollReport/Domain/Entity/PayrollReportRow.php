@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\Domain\Entity;
 
 use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
+use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
@@ -36,6 +37,7 @@ final readonly class PayrollReportRow
      * @throws CannotCalculateBonusDetailsException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
+     * @throws CannotGetDepartmentException
      */
     public static function generate(
         IdentifierGeneratorInterface $identifierGenerator,

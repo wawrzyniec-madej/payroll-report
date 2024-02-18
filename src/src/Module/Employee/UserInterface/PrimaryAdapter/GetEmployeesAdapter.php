@@ -8,7 +8,7 @@ use App\Module\Employee\Application\Query\GetAllEmployeesQuery;
 use App\Shared\Domain\Exception\CollectionElementInvalidException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 
-final readonly class GetAllEmployeesAdapter
+final readonly class GetEmployeesAdapter
 {
     public function __construct(
         private GetAllEmployeesQuery $getAllEmployeesQuery

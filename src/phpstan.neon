@@ -8,6 +8,7 @@ parameters:
     exceptions:
         check:
             missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
         checkedExceptionClasses:
         			- 'App\Shared\Domain\Exception\DomainException'
         			- 'App\Shared\UserInterface\Exception\UserInterfaceException'
