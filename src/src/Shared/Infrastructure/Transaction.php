@@ -32,7 +32,7 @@ final class Transaction implements TransactionInterface
     public function start(
         Closure $method
     ): mixed {
-        /** Enable pass through without starting another transaction */
+        /* Enable pass through without starting another transaction */
         if ($this->isRunning) {
             return $method();
         }

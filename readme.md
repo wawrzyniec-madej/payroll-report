@@ -42,7 +42,17 @@ Available filter names are:
 - name
 - surname
 
+## Entering database:
+Database details are:
+
+Host: `localhost`\
+Port: `3306`\
+User: `root`\
+Password: `rootpassword`\
+Database: `payroll`\
+Database type: `mariadb 10.5.5`
+
 ## Design assumptions:
-1. Departments, employees and bonuses can be added by making direct inserts into database
-2. Request can only use one sort at a time
-3. Request can use many filters at a time
+- Departments, employees and bonuses can be added by making direct inserts into database
+- Request can only use one sort at a time
+- Request can use many filters at a time
