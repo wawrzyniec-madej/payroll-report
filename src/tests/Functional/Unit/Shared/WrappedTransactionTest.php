@@ -22,9 +22,8 @@ final class WrappedTransactionTest extends KernelTestCase
             $transactionId = $this->transaction->getId();
 
             $this->transaction->start(function () use ($transactionId) {
-                self::assertEquals(
-                    $transactionId,
-                    $this->transaction->getId()
+                self::assertTrue(
+                    $transactionId->isEqual($this->transaction->getId())
                 );
             });
         });

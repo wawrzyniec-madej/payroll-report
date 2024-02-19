@@ -28,7 +28,6 @@ final readonly class GeneratePayrollReportCommand
 
     public function generate(): Identifier
     {
-        /* This doesn't work with my phpstan setup, as stan does not report exceptions from callables, even if they are executed at once */
         return $this->transaction->start(function (): Identifier {
             $employees = $this->getAllEmployees->getAll();
 

@@ -15,4 +15,9 @@ final readonly class Identifier
     {
         return $this->value;
     }
+
+    public function isEqual(self $compared): bool
+    {
+        return $this->value === $compared->value;
+    }
 }
