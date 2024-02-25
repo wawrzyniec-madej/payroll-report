@@ -17,23 +17,15 @@ use App\Shared\Domain\ValueObject\Identifier;
 final readonly class GeneratePayrollReportCommand
 {
     public function __construct(
-        private PayrollReportFactory $payrollReportFactory,
-        private GetAllEmployeesInterface $getAllEmployees
+        private PayrollReportFactory $payrollReportFactory
     ) {
     }
 
-    /**
-     * @throws InvalidYearsOfSeniorityException
-     * @throws InvalidDateTimeException
-     * @throws CannotGetDepartmentException
-     */
     public function generate(): Identifier
     {
-        $employees = $this->getAllEmployees->getAll();
-
         $payrollReport = $this->payrollReportFactory
             ->create()
-            ->generateForEmployees($employees);
+            ->generateForAllEmployees();
 
         return $payrollReport->getId();
     }

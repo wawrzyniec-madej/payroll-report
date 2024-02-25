@@ -22,11 +22,6 @@ final readonly class GeneratePayrollReportController
     ) {
     }
 
-    /**
-     * @throws InvalidYearsOfSeniorityException
-     * @throws InvalidDateTimeException
-     * @throws CannotGetDepartmentException
-     */
     #[Route(path: '/payroll-report/generate', methods: [Request::METHOD_POST])]
     public function __invoke(): ResultResponse
     {
