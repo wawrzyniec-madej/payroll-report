@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Unit\Shared;
 
-use App\Shared\Application\Interface\TransactionInterface;
+use App\Shared\Domain\Interface\TransactionInterface;
 use App\Tests\Helper\KernelTestCase;
 
 final class WrappedTransactionTest extends KernelTestCase

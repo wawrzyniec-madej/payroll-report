@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure;
 
 use App\Shared\Application\Exception\TransactionFailedException;
-use App\Shared\Application\Interface\TransactionInterface;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
+use App\Shared\Domain\Interface\TransactionInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 use Closure;
 use Doctrine\DBAL\Connection;
