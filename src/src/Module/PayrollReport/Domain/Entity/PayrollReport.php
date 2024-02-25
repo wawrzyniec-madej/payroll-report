@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\Entity;
 
-use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
-use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
-use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
+use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
-use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\Interface\TransactionInterface;
@@ -22,68 +18,47 @@ use App\Shared\Domain\ValueObject\Identifier;
 
 final class PayrollReport extends AggregateRoot
 {
-    private function __construct(
+    /** @param TransactionInterface<self> $transaction */
+    public function __construct(
+        private readonly AggregateEventDispatcherInterface $aggregateEventDispatcher,
+        private readonly TransactionInterface $transaction,
         private readonly Identifier $id,
         private readonly PayrollReportRowCollection $rows,
         private readonly DateTime $generationDate
     ) {
     }
 
-    /**
-     * @param TransactionInterface<PayrollReport> $transaction
-     * @throws InvalidYearsOfSeniorityException
-     * @throws IncompatibleMoneyException
-     * @throws CannotGetDepartmentException
-     * @throws CannotCalculateBonusDetailsException
-     */
-    public static function generate(
-        AggregateEventDispatcherInterface $aggregateEventDispatcher,
-        TransactionInterface $transaction,
-        IdentifierGeneratorInterface $identifierGenerator,
-        EmployeeCollection $employees,
-        CalculateBonusDetailsInterface $getBonusDetails,
-        GetDepartmentInterface $getDepartment
+    public function generateForAllEmployees(
+        GetAllEmployeesInterface $getAllEmployees,
+        CalculateBonusDetailsInterface $calculateBonusDetails,
+        GetDepartmentInterface $getDepartment,
+        IdentifierGeneratorInterface $identifierGenerator
     ): self {
-        /**
-         * @throws InvalidYearsOfSeniorityException
-         * @throws IncompatibleMoneyException
-         * @throws CannotGetDepartmentException
-         * @throws CannotCalculateBonusDetailsException
-         */
-        return $transaction->start(
+        return $this->transaction->start(
             function () use (
                 $getDepartment,
-                $getBonusDetails,
-                $employees,
-                $identifierGenerator,
-                $aggregateEventDispatcher
+                $calculateBonusDetails,
+                $getAllEmployees,
+                $identifierGenerator
             ): self {
-                $payrollReport = new self(
-                    $identifierGenerator->generate(),
-                    PayrollReportRowCollection::createEmpty(),
-                    DateTime::now()
-                );
+                $employees = $getAllEmployees->getAll();
 
                 foreach ($employees as $employee) {
-                    $payrollReport->addRow(
+                    $this->addRow(
                         PayrollReportRow::generate(
                             $identifierGenerator,
                             $employee,
-                            $getBonusDetails,
+                            $calculateBonusDetails,
                             $getDepartment
                         )
                     );
                 }
 
-                $payrollReport->addEvent(
-                    PayrollReportGenerated::create(
-                        $payrollReport
-                    )
-                );
+                $this->addEvent(PayrollReportGenerated::create($this));
 
-                $aggregateEventDispatcher->dispatch($payrollReport);
+                $this->aggregateEventDispatcher->dispatch($this);
 
-                return $payrollReport;
+                return $this;
             }
         );
     }
