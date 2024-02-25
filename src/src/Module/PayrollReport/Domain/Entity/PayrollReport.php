@@ -6,13 +6,10 @@ namespace App\Module\PayrollReport\Domain\Entity;
 
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
-use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
-use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
+use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportForAllEmployees;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
-use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\Interface\TransactionInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 
@@ -20,6 +17,7 @@ final class PayrollReport extends AggregateRoot
 {
     /** @param TransactionInterface<self> $transaction */
     public function __construct(
+        private readonly GeneratePayrollReportForAllEmployees $generatePayrollReportForAllEmployees,
         private readonly AggregateEventDispatcherInterface $aggregateEventDispatcher,
         private readonly TransactionInterface $transaction,
         private readonly Identifier $id,
@@ -28,39 +26,16 @@ final class PayrollReport extends AggregateRoot
     ) {
     }
 
-    public function generateForAllEmployees(
-        GetAllEmployeesInterface $getAllEmployees,
-        CalculateBonusDetailsInterface $calculateBonusDetails,
-        GetDepartmentInterface $getDepartment,
-        IdentifierGeneratorInterface $identifierGenerator
-    ): self {
-        return $this->transaction->start(
-            function () use (
-                $getDepartment,
-                $calculateBonusDetails,
-                $getAllEmployees,
-                $identifierGenerator
-            ): self {
-                $employees = $getAllEmployees->getAll();
+    public function generateForAllEmployees(): self
+    {
+        return $this->transaction->start(function (): self {
 
-                foreach ($employees as $employee) {
-                    $this->addRow(
-                        PayrollReportRow::generate(
-                            $identifierGenerator,
-                            $employee,
-                            $calculateBonusDetails,
-                            $getDepartment
-                        )
-                    );
-                }
+            $this->generatePayrollReportForAllEmployees->generate($this);
+            $this->addEvent(PayrollReportGenerated::create($this));
+            $this->aggregateEventDispatcher->dispatch($this);
 
-                $this->addEvent(PayrollReportGenerated::create($this));
-
-                $this->aggregateEventDispatcher->dispatch($this);
-
-                return $this;
-            }
-        );
+            return $this;
+        });
     }
 
     public function getId(): Identifier
