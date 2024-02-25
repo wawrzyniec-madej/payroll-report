@@ -6,7 +6,7 @@ namespace App\Module\PayrollReport\Domain\Entity;
 
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForAllEmployees;
+use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForEmployees;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
@@ -17,7 +17,7 @@ final class PayrollReport extends AggregateRoot
 {
     /** @param TransactionInterface<self> $transaction */
     public function __construct(
-        private readonly GeneratePayrollReportRowsForAllEmployees $generatePayrollReportRowsForAllEmployees,
+        private readonly GeneratePayrollReportRowsForEmployees $generatePayrollReportRowsForAllEmployees,
         private readonly AggregateEventDispatcherInterface $aggregateEventDispatcher,
         private readonly TransactionInterface $transaction,
         private readonly Identifier $id,

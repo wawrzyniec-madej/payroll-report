@@ -6,7 +6,7 @@ namespace App\Module\PayrollReport\Domain\Factory;
 
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
-use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForAllEmployees;
+use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForEmployees;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
@@ -18,7 +18,7 @@ final readonly class PayrollReportFactory
         private IdentifierGeneratorInterface $identifierGenerator,
         private TransactionInterface $transaction,
         private AggregateEventDispatcherInterface $aggregateEventDispatcher,
-        private GeneratePayrollReportRowsForAllEmployees $generatePayrollReportForAllEmployees
+        private GeneratePayrollReportRowsForEmployees $generatePayrollReportForAllEmployees
     ) {
     }
 

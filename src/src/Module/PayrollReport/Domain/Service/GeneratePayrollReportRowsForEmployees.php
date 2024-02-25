@@ -16,7 +16,7 @@ use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 
-final readonly class GeneratePayrollReportRowsForAllEmployees
+final readonly class GeneratePayrollReportRowsForEmployees
 {
     public function __construct(
         private GetAllEmployeesInterface $getAllEmployees,
