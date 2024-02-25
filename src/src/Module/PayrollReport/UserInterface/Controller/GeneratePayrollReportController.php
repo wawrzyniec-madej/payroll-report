@@ -5,12 +5,7 @@ declare(strict_types=1);
 namespace App\Module\PayrollReport\UserInterface\Controller;
 
 use App\Module\PayrollReport\Application\Command\GeneratePayrollReportCommand;
-use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
-use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
-use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\UserInterface\View\IdentifierView;
-use App\Shared\Domain\Exception\IncompatibleMoneyException;
-use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\UserInterface\Response\ResultResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\PayrollReport\Domain\Service;
 
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
@@ -14,7 +16,7 @@ use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
 use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 
-final readonly class GeneratePayrollReportForAllEmployees
+final readonly class GeneratePayrollReportRowsForAllEmployees
 {
     public function __construct(
         private GetAllEmployeesInterface $getAllEmployees,
@@ -38,7 +40,7 @@ final readonly class GeneratePayrollReportForAllEmployees
         foreach ($this->getAllEmployees->getAll() as $employee) {
             $payrollReport->addRow(
                 PayrollReportRow::generate(
-                    $this->identifierGenerator,
+                    $this->identifierGenerator->generate(),
                     $employee,
                     $this->calculateBonusDetails,
                     $this->getDepartment
