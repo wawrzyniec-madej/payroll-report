@@ -19,21 +19,24 @@ final readonly class PayrollReportFactory
         private IdentifierGeneratorInterface $identifierGenerator,
         private TransactionInterface $transaction,
         private AggregateEventDispatcherInterface $aggregateEventDispatcher,
-        private GeneratePayrollReportRowsForEmployees $generatePayrollReportForAllEmployees,
+        private GeneratePayrollReportRowsForEmployees $generatePayrollReportRowsForEmployees,
         private GetAllEmployeesInterface $getAllEmployees
     ) {
     }
 
     public function create(): PayrollReport
     {
-        return new PayrollReport(
-            $this->generatePayrollReportForAllEmployees,
-            $this->aggregateEventDispatcher,
+        $instance = new PayrollReport(
+            $this->generatePayrollReportRowsForEmployees,
             $this->getAllEmployees,
-            $this->transaction,
             $this->identifierGenerator->generate(),
             PayrollReportRowCollection::createEmpty(),
             DateTime::now()
         );
+
+        $instance->setTransaction($this->transaction);
+        $instance->setEventDispatcher($this->aggregateEventDispatcher);
+
+        return $instance;
     }
 }
