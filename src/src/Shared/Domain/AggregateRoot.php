@@ -51,13 +51,17 @@ abstract class AggregateRoot
         return $this->transaction;
     }
 
-    public function setTransaction(TransactionInterface $transaction): void
+    public function setTransaction(TransactionInterface $transaction): static
     {
         $this->transaction = $transaction;
+
+        return $this;
     }
 
-    public function setEventDispatcher(AggregateEventDispatcherInterface $aggregateEventDispatcher): void
+    public function setEventDispatcher(AggregateEventDispatcherInterface $aggregateEventDispatcher): static
     {
         $this->aggregateEventDispatcher = $aggregateEventDispatcher;
+
+        return $this;
     }
 }

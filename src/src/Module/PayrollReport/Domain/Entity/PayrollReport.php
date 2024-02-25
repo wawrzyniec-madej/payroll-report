@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\Entity;
 
+use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForEmployees;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
@@ -16,18 +16,15 @@ final class PayrollReport extends AggregateRoot
 {
     public function __construct(
         private readonly GeneratePayrollReportRowsForEmployees $generatePayrollReportRowsForEmployees,
-        private readonly GetAllEmployeesInterface $getAllEmployees,
         private readonly Identifier $id,
         private readonly PayrollReportRowCollection $rows,
         private readonly DateTime $generationDate
     ) {
     }
 
-    public function generateForAllEmployees(): self
+    public function generateForEmployees(EmployeeCollection $employees): self
     {
-        return $this->getTransaction()->start(function (): self {
-            $employees = $this->getAllEmployees->getAll();
-
+        return $this->getTransaction()->start(function () use ($employees): self {
             $this->generatePayrollReportRowsForEmployees->generate($this, $employees);
             $this->addEvent(PayrollReportGenerated::create($this));
             $this->getEventDispatcher()->dispatch($this);
