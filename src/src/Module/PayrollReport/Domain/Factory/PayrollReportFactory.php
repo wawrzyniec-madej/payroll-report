@@ -6,6 +6,7 @@ namespace App\Module\PayrollReport\Domain\Factory;
 
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
+use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForEmployees;
 use App\Shared\Domain\DateTime;
 use App\Shared\Domain\Interface\AggregateEventDispatcherInterface;
@@ -18,7 +19,8 @@ final readonly class PayrollReportFactory
         private IdentifierGeneratorInterface $identifierGenerator,
         private TransactionInterface $transaction,
         private AggregateEventDispatcherInterface $aggregateEventDispatcher,
-        private GeneratePayrollReportRowsForEmployees $generatePayrollReportForAllEmployees
+        private GeneratePayrollReportRowsForEmployees $generatePayrollReportForAllEmployees,
+        private GetAllEmployeesInterface $getAllEmployees
     ) {
     }
 
@@ -27,6 +29,7 @@ final readonly class PayrollReportFactory
         return new PayrollReport(
             $this->generatePayrollReportForAllEmployees,
             $this->aggregateEventDispatcher,
+            $this->getAllEmployees,
             $this->transaction,
             $this->identifierGenerator->generate(),
             PayrollReportRowCollection::createEmpty(),

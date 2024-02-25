@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Module\PayrollReport\Domain\Service;
 
+use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Entity\PayrollReport;
 use App\Module\PayrollReport\Domain\Entity\PayrollReportRow;
 use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
 use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
 use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
 use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
-use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
 use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
 use App\Shared\Domain\Exception\InvalidDateTimeException;
@@ -19,7 +19,6 @@ use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 final readonly class GeneratePayrollReportRowsForEmployees
 {
     public function __construct(
-        private GetAllEmployeesInterface $getAllEmployees,
         private CalculateBonusDetailsInterface $calculateBonusDetails,
         private GetDepartmentInterface $getDepartment,
         private IdentifierGeneratorInterface $identifierGenerator
@@ -29,15 +28,14 @@ final readonly class GeneratePayrollReportRowsForEmployees
     /**
      * @throws CannotGetDepartmentException
      * @throws InvalidYearsOfSeniorityException
-     * @throws InvalidDateTimeException
      * @throws CannotCalculateBonusDetailsException
      * @throws CannotGetDepartmentException
      * @throws InvalidYearsOfSeniorityException
      * @throws IncompatibleMoneyException
      */
-    public function generate(PayrollReport $payrollReport): PayrollReport
+    public function generate(PayrollReport $payrollReport, EmployeeCollection $employees): PayrollReport
     {
-        foreach ($this->getAllEmployees->getAll() as $employee) {
+        foreach ($employees as $employee) {
             $payrollReport->addRow(
                 PayrollReportRow::generate(
                     $this->identifierGenerator->generate(),
