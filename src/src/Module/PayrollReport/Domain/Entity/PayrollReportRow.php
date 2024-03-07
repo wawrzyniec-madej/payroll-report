@@ -15,7 +15,6 @@ use App\Module\PayrollReport\Domain\ValueObject\Employee;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeName;
 use App\Module\PayrollReport\Domain\ValueObject\EmployeeSurname;
 use App\Shared\Domain\Exception\IncompatibleMoneyException;
-use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\ValueObject\Identifier;
 
@@ -40,7 +39,7 @@ final readonly class PayrollReportRow
      * @throws CannotGetDepartmentException
      */
     public static function generate(
-        IdentifierGeneratorInterface $identifierGenerator,
+        Identifier $identifier,
         Employee $employee,
         CalculateBonusDetailsInterface $getBonusDetails,
         GetDepartmentInterface $getDepartment
@@ -54,7 +53,7 @@ final readonly class PayrollReportRow
         );
 
         return new self(
-            $identifierGenerator->generate(),
+            $identifier,
             $employee->getName(),
             $employee->getSurname(),
             $employee->getRemunerationBase(),

@@ -7,62 +7,35 @@ namespace App\Module\PayrollReport\Domain\Entity;
 use App\Module\PayrollReport\Domain\Collection\EmployeeCollection;
 use App\Module\PayrollReport\Domain\Collection\PayrollReportRowCollection;
 use App\Module\PayrollReport\Domain\Event\PayrollReportGenerated;
-use App\Module\PayrollReport\Domain\Exception\CannotCalculateBonusDetailsException;
-use App\Module\PayrollReport\Domain\Exception\CannotGetDepartmentException;
-use App\Module\PayrollReport\Domain\Exception\InvalidYearsOfSeniorityException;
-use App\Module\PayrollReport\Domain\Interface\CalculateBonusDetailsInterface;
-use App\Module\PayrollReport\Domain\Interface\GetDepartmentInterface;
+use App\Module\PayrollReport\Domain\Interface\GetAllEmployeesInterface;
+use App\Module\PayrollReport\Domain\Service\GeneratePayrollReportRowsForEmployees;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DateTime;
-use App\Shared\Domain\Exception\IncompatibleMoneyException;
-use App\Shared\Domain\Interface\IdentifierGeneratorInterface;
 use App\Shared\Domain\ValueObject\Identifier;
 
 final class PayrollReport extends AggregateRoot
 {
-    private function __construct(
+    public function __construct(
+        private readonly GetAllEmployeesInterface $getAllEmployees,
+        private readonly GeneratePayrollReportRowsForEmployees $generatePayrollReportRowsForEmployees,
         private readonly Identifier $id,
         private readonly PayrollReportRowCollection $rows,
         private readonly DateTime $generationDate
     ) {
     }
 
-    /**
-     * @throws CannotCalculateBonusDetailsException
-     * @throws InvalidYearsOfSeniorityException
-     * @throws IncompatibleMoneyException
-     * @throws CannotGetDepartmentException
-     */
-    public static function generate(
-        IdentifierGeneratorInterface $identifierGenerator,
-        EmployeeCollection $employees,
-        CalculateBonusDetailsInterface $getBonusDetails,
-        GetDepartmentInterface $getDepartment
-    ): self {
-        $payrollReport = new self(
-            $identifierGenerator->generate(),
-            PayrollReportRowCollection::createEmpty(),
-            DateTime::now()
-        );
+    public function generateForAllEmployees(): self
+    {
+        return $this->getTransaction()->start(function (): self {
 
-        foreach ($employees as $employee) {
-            $payrollReport->addRow(
-                PayrollReportRow::generate(
-                    $identifierGenerator,
-                    $employee,
-                    $getBonusDetails,
-                    $getDepartment
-                )
-            );
-        }
+            $employees = $this->getAllEmployees->getAll();
 
-        $payrollReport->addEvent(
-            PayrollReportGenerated::create(
-                $payrollReport
-            )
-        );
+            $this->generatePayrollReportRowsForEmployees->generate($this, $employees);
+            $this->addEvent(PayrollReportGenerated::create($this));
+            $this->getEventDispatcher()->dispatch($this);
 
-        return $payrollReport;
+            return $this;
+        });
     }
 
     public function getId(): Identifier
